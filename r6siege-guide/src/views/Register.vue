@@ -7,20 +7,37 @@
           <b-container id="loginContainer">
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
-                <b-icon icon="envelope" aria-hidden="true"></b-icon>
+                <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" name="Email" placeholder="Email" type="email"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" name="FullName" placeholder="Full name" type="text"></b-form-input>
             </b-input-group>
-            <br>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
-                <b-icon icon="lock" aria-hidden="true"></b-icon>
+                <b-icon icon="person" class="inputBoxIcon" aria-hidden="true" :style="{opacity: '100%'}"></b-icon>
+              </b-input-group-text>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Username" placeholder="Username" type="text"></b-form-input>
+            </b-input-group>
+            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
+                <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>
+              </b-input-group-text>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Email" placeholder="Email" type="email"></b-form-input>
+            </b-input-group>
+            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
+                <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
               <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Password" placeholder="Password" type="password"></b-form-input>
             </b-input-group>
+            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
+                <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
+              </b-input-group-text>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="RepeatPassword" placeholder="Repeat password" type="password"></b-form-input>
+            </b-input-group>
           </b-container>
           <br>
-          <b-button id="loginButton" :style="{borderRadius: '100px'}">Log in</b-button>
+          <b-button id="loginButton" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
         </b-form>
         <LoginRegisterLinks :is-register="true">
 
@@ -31,13 +48,11 @@
 </template>
 
 <script>
-// import LoginRegisterTemplate from "@/components/LoginRegisterTemplate";
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
 
 export default {
   name: "Register",
   components: {
-    // LoginRegisterTemplate,
     LoginRegisterLinks
   }
 }
@@ -59,15 +74,21 @@ export default {
 
 .inputBox {
   margin-right: 50px;
+  padding-top: 25px;
 }
 
-.UserInfoButton {
-  opacity: 40%;
+.UserInfoButton, .inputBoxIcon {
+  opacity: 70%;
+  border: transparent;
+}
+
+.inputBoxIcon {
+  color: white;
 }
 
 #loginInputField {
   text-align: center;
-  margin-top: 50px;
+  padding-top: 1%;
 }
 
 #loginButton {
@@ -75,7 +96,6 @@ export default {
   color: bisque;
   z-index: 1000;
 }
-
 
 /*Background styles*/
 .Background {
@@ -86,8 +106,9 @@ export default {
 }
 
 #mainBackground {
-  background-color: #20123C;
-  opacity: 50%;
+  /*background-color: #20123C;*/
+  background-color: #171917;
+  opacity: 75%;
   width: 100vw;
   height: 100vh;
   z-index: -10;
@@ -95,15 +116,14 @@ export default {
 
 #logoBackground {
   background-image: url("../assets/loginPicture.jpg");
-
-  /*opacity: 50%;*/
+  opacity: 100%;
   width: 100vw;
   height: 100vh;
   background-attachment: fixed;
 }
 
 #mainContext {
-  padding-top: 10%;
+  padding-top: 9%;
 }
 
 /*End of background styles*/

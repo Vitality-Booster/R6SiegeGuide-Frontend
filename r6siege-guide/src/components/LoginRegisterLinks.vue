@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div >
     <!-- If we are on Login page, then create a link to Register page and Main page -->
     <div class="otherLinks" v-if="!isRegister">
-      <router-link class="link" to="/">Continue without login</router-link>
-      <router-link class="link" to="/register">Register</router-link>
+      <router-link class="page-link" to="/register" >Register</router-link>
+      <br>
+      <router-link class="page-link" to="/">Continue without login</router-link>
     </div>
     <!-- If we are on Register page, then create a link to Link page -->
     <div class="otherLinks" v-else>
-      <router-link class="link" to="/login">Login</router-link>
+      <router-link class="page-link" to="/login">Login</router-link>
     </div>
   </div>
 </template>
@@ -31,43 +32,43 @@ export default {
 </script>
 
 <style scoped>
-.register-login-link {
-
-}
 
 .otherLinks {
-  width: 100%;
+  width: 20%;
   min-width: 225px;
   margin: auto;
   text-align: center;
-  padding-top: 2%;
+  padding-top: 2px;
 }
 
-.link {
-  color: wheat;
-  padding: 0 10px;
-  /*position: relative;*/
-}
-
-.link:after {
-  content: '';
-  position: absolute;
-  left: 0;
+.page-link {
   display: inline-block;
-  height: 1em;
-  width: 50%;
-  border-bottom: 2px solid;
-  margin-top: 10px;
-  opacity: 0;
-  -webkit-transition: opacity 1s, -webkit-transform 1s;
-  transition: opacity 1s, transform 1s;
-  -webkit-transform: scale(0,1);
-  transform: scale(0,1);
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  background: transparent;
+  border: transparent;
+  position: relative;
+  color: wheat;
+  transition: all 0.8s ease;
 }
 
-.link:hover:after {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
+.page-link:after {
+  display: block;
+  content: "";
+  position: absolute;
+  height: 1px;
+  background-color: wheat;
+  width: 0;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+  transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) all;
 }
+
+.page-link:hover:after {
+  width: 90%;
+}
+
+
 </style>
