@@ -9,35 +9,35 @@
               <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
                 <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" name="FullName" placeholder="Full name" type="text"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="userFullName" placeholder="Full name" type="text"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="person" class="inputBoxIcon" aria-hidden="true" :style="{opacity: '100%'}"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Username" placeholder="Username" type="text"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="username" placeholder="Username" type="text"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Email" placeholder="Email" type="email"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="userEmail" placeholder="Email" type="email"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Password" placeholder="Password" type="password"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="userPassword" placeholder="Password" type="password"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="RepeatPassword" placeholder="Repeat password" type="password"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="repeatPassword" placeholder="Repeat password" type="password"></b-form-input>
             </b-input-group>
           </b-container>
           <br>
-          <b-button id="loginButton" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
+          <b-button id="loginButton" @click="registerUser()" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
         </b-form>
         <LoginRegisterLinks :is-register="true">
 
@@ -49,11 +49,33 @@
 
 <script>
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
+import axios from "axios";
 
 export default {
   name: "Register",
+  data () {
+    return {
+      userFullName: '',
+      username: '',
+      userEmail: '',
+      userPassword: '',
+      repeatPassword: '',
+    }
+  },
   components: {
     LoginRegisterLinks
+  },
+  methods: {
+    async registerUser() {
+      console.log(this.$data);
+      if (this.$data.userPassword === this.$data.repeatPassword) {
+        await axios.post("http://localhost:8081/register", this.$data).then(response => (
+            console.log(response)))
+      }
+      // else {
+      //
+      // }
+    }
   }
 }
 </script>
