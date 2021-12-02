@@ -68,8 +68,16 @@ export default {
   methods: {
     async registerUser() {
       console.log(this.$data);
+      // devServer.proxy
       if (this.$data.userPassword === this.$data.repeatPassword) {
-        await axios.post("http://localhost:8081/register", this.$data).then(response => (
+        await axios.post("/api/register",
+            {
+              fullName: this.userFullName,
+              email: this.userEmail,
+              password: this.userPassword,
+              username: this.username
+            })
+            .then(response => (
             console.log(response)))
       }
       // else {
