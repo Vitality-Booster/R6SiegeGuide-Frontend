@@ -1,6 +1,7 @@
 <template v-if="showLogin">
 
   <div id="logoBackground" class="Background" style="background-color: #20123C">
+    <h1>Points: {{point()}}</h1>
     <div id="mainBackground">
       <div id="mainContext">
         <h1 id="header">Login</h1>
@@ -52,9 +53,19 @@ export default {
   },
   methods: {
     async loginUser() {
-      await axios.post("http://127.0.0.1:8080/login", this.$data).then(response => (
+      await axios.post("/api/login",
+          {
+            email: this.userEmail,
+            password: this.userPassword
+          })
+          .then(response => (
           console.log(response)
       ))
+    }
+  },
+  computed: {
+    point() {
+      return this.$store.state.points
     }
   }
 }
