@@ -1,7 +1,6 @@
 <template v-if="showLogin">
 
   <div id="logoBackground" class="Background" style="background-color: #20123C">
-    <h1>Points: {{point()}}</h1>
     <div id="mainBackground">
       <div id="mainContext">
         <h1 id="header">Login</h1>

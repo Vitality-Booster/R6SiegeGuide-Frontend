@@ -38,5 +38,3 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 // const auth = getAuth()
-
-
