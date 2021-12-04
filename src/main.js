@@ -38,5 +38,3 @@ createApp(App).use(router).use(store).mount('#app')
 // initializeApp(firebaseConfig);
 
 // const auth = getAuth()
-
-
