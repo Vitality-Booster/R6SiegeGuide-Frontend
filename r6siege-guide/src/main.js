@@ -1,6 +1,8 @@
 import {createApp} from 'vue'
 // import Vuex from 'vuex'
 import App from './App.vue'
+ // import { BootstrapVue,  } from 'bootstrap-vue'
+
 
 // import { initializeApp } from 'firebase/app'
 // import { getAuth } from 'firebase/auth'
