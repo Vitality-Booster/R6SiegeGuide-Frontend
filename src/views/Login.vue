@@ -10,16 +10,16 @@
               <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
                 <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" name="Email" placeholder="Email" type="email"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="userEmail" placeholder="Email" type="email"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" name="Password" placeholder="Password" type="password"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="userPassword" placeholder="Password" type="password"></b-form-input>
             </b-input-group>
           </b-container>
-          <b-button id="loginButton" :style="{borderRadius: '100px', width: '120px'}">Log in</b-button>
+          <b-button id="loginButton" @click="loginUser()" :style="{borderRadius: '100px', width: '120px'}">Log in</b-button>
         </b-form>
         <LoginRegisterLinks>
 
@@ -32,10 +32,16 @@
 <script>
  // import LoginRegisterTemplate from "@/components/LoginRegisterTemplate";
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
+import axios from 'axios';
 
 export default {
   name: 'Login',
-
+  data () {
+    return {
+      userEmail : '',
+      userPassword : ''
+    }
+  },
   props: {
     msg: String,
     showLogin: Boolean
@@ -43,6 +49,23 @@ export default {
   components: {
     // LoginRegisterTemplate,
     LoginRegisterLinks
+  },
+  methods: {
+    async loginUser() {
+      await axios.post("/api/login",
+          {
+            email: this.userEmail,
+            password: this.userPassword
+          })
+          .then(response => (
+          console.log(response)
+      ))
+    }
+  },
+  computed: {
+    point() {
+      return this.$store.state.points
+    }
   }
 }
 </script>

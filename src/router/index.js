@@ -1,10 +1,10 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 
-Vue.use(VueRouter)
+// Vue.use(VueRouter)
 
 // check router properties in order to send people to the Login page in case, they are not logged in
 // (Probably wont need that after all, as I may have "Continue without login" functionality)

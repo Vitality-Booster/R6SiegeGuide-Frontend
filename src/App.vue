@@ -8,6 +8,9 @@
 
 export default {
   name: 'App',
+  props: {
+    //publicP
+  }
 }
 </script>
 
