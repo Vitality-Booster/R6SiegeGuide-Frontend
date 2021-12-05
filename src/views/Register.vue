@@ -71,7 +71,7 @@ export default {
       console.log(this.$data);
       // devServer.proxy
       if (this.$data.userPassword === this.$data.repeatPassword) {
-        await axios.post("/api/register",
+        await axios.post(process.env.VUE_APP_BASE_URL + `users/register`,
             {
               fullName: this.userFullName,
               email: this.userEmail,
