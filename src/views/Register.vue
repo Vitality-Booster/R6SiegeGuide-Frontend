@@ -7,9 +7,10 @@
           <b-container id="loginContainer">
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
-                <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>
+<!--                <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>-->
+                <BIcon icon="file-earmark-person" class="inputBoxIcon" aria-hidden="true" />
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="userFullName" placeholder="Full name" type="text"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="fullName" placeholder="Full name" type="text"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
@@ -21,13 +22,13 @@
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="userEmail" placeholder="Email" type="email"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="email" placeholder="Email" type="email"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
               </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="userPassword" placeholder="Password" type="password"></b-form-input>
+              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="password" placeholder="Password" type="password"></b-form-input>
             </b-input-group>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
@@ -37,7 +38,7 @@
             </b-input-group>
           </b-container>
           <br>
-          <b-button id="loginButton" @click="registerUser()" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
+          <b-button id="loginButton" @click="registerUser" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
         </b-form>
         <LoginRegisterLinks :is-register="true">
 
@@ -50,41 +51,60 @@
 <script>
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
 // import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-import axios from "axios";
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   name: "Register",
-  data () {
-    return {
-      userFullName: '',
-      username: '',
-      userEmail: '',
-      userPassword: '',
-      repeatPassword: '',
-    }
-  },
   components: {
     LoginRegisterLinks
   },
-  methods: {
-    async registerUser() {
-      console.log(this.$data);
-      // devServer.proxy
-      if (this.$data.userPassword === this.$data.repeatPassword) {
-        await axios.post(process.env.VUE_APP_BASE_URL + `users/register`,
-            {
-              fullName: this.userFullName,
-              email: this.userEmail,
-              password: this.userPassword,
-              username: this.username
-            })
-            .then(response => (
-            console.log(response)))
+  setup () {
+    const fullName = ref('')
+    const username = ref('')
+    const email = ref('')
+    const password = ref('')
+    const repeatPassword = ref('')
+
+    const store = useStore()
+    const router = useRouter()
+
+    const registerUser = async () => {
+      if (password.value === repeatPassword.value) {
+        try {
+          await store.dispatch('register', {
+            fullName: fullName.value,
+            email: email.value,
+            username: username.value,
+            password: password.value
+          })
+          await router.push('/')
+        } catch(err) {
+          alert(err.message)
+        }
       }
-      // else {
-      //
-      // }
+      else {
+        alert("Password and Repeat password field should be the same")
+      }
     }
+
+    return {
+      fullName,
+      username,
+      email,
+      password,
+      repeatPassword,
+      registerUser,
+    }
+  },
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+
   }
 }
 </script>

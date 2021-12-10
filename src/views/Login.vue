@@ -1,41 +1,75 @@
 <template v-if="showLogin">
-
   <div id="logoBackground" class="Background" style="background-color: #20123C">
     <div id="mainBackground">
-      <div id="mainContext">
+      <div v-if="error">
+        {{error}}
+      </div>
+      <div class="pt-5">
         <h1 id="header">Login</h1>
-        <b-form id="loginInputField">
-          <b-container id="loginContainer">
-            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
-              <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
-                <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>
-              </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="userEmail" placeholder="Email" type="email"></b-form-input>
-            </b-input-group>
-            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
-              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
-                <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>
-              </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="userPassword" placeholder="Password" type="password"></b-form-input>
-            </b-input-group>
-          </b-container>
-          <b-button id="loginButton" @click="loginUser()" :style="{borderRadius: '100px', width: '120px'}">Log in</b-button>
-        </b-form>
-        <LoginRegisterLinks>
-
-        </LoginRegisterLinks>
+<!--        <BCol>-->
+<!--          <BRow>-->
+<!--            <BButton>Some button</BButton>-->
+<!--          </BRow>-->
+<!--        </BCol>-->
+        <div class="pt-1 text-center" id="loginInputField">
+<!--          <BContainer id="loginContainer">-->
+          <BContainer class="">
+            <BCol class="pe-4">
+              <BInputGroup class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+                <BInputGroupText is-text :style="{background: 'transparent', border: 'transparent'}">
+                  <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true" />
+                </BInputGroupText>
+                <BFormInput :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="email" placeholder="Email" type="email"></BFormInput>
+              </BInputGroup>
+              <BInputGroup class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+                <BInputGroupText is-text :style="{border: 'none', background: 'transparent'}">
+                  <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true" />
+                </BInputGroupText>
+                <BFormInput :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="password" placeholder="Password" type="password"></BFormInput>
+              </BInputGroup>
+            </BCol>
+          </BContainer>
+          <BButton id="loginButton" @click="handleLogin" :style="{borderRadius: '100px', width: '120px'}">Log in</BButton>
+        </div>
+        <LoginRegisterLinks />
       </div>
     </div>
   </div>
 </template>
 
 <script>
- // import LoginRegisterTemplate from "@/components/LoginRegisterTemplate";
-import LoginRegisterLinks from "@/components/LoginRegisterLinks";
-import axios from 'axios';
+import LoginRegisterLinks from "@/components/LoginRegisterLinks"
+import {ref} from "vue";
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'Login',
+  setup() {
+    const email = ref('')
+    const password = ref('')
+    const error = ref(null)
+
+    const store = useStore()
+    const router = useRouter()
+
+    const handleLogin = async () => {
+      try {
+        await store.dispatch('login', {
+          email: email.value,
+          password: password.value
+        })
+        await router.push('/')
+      } catch(err) {
+        alert(err.message)
+      }
+    }
+
+    return {email, password, handleLogin, error, store}
+  },
+  components: {
+    LoginRegisterLinks,
+  },
   data () {
     return {
       userEmail : '',
@@ -46,28 +80,11 @@ export default {
     msg: String,
     showLogin: Boolean
   },
-  components: {
-    // LoginRegisterTemplate,
-    LoginRegisterLinks
-  },
   methods: {
-    async loginUser() {
-      await axios.post("/api/login",
-          {
-            email: this.userEmail,
-            password: this.userPassword
-          })
-          .then(response => (
-          console.log(response)
-      ))
-    }
-  },
-  computed: {
-    point() {
-      return this.$store.state.points
-    }
+
   }
 }
+
 </script>
 
 <style scoped>
@@ -78,7 +95,6 @@ export default {
 }
 
 #loginContainer {
-  align-self: center;
   text-align: center;
   /*margin: auto;*/
   margin-left: 12%;
@@ -127,18 +143,26 @@ export default {
   /*background-color: #20123C;*/
   background-color: #171917;
   opacity: 75%;
-  width: 100vw;
-  height: 100vh;
-  z-index: -10;
+  /*height: 100%;*/
+  /*width: 100%;*/
+  min-height: 100vh;
+  min-width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #logoBackground {
   background-image: url("../assets/loginPicture.jpg");
 
   /*opacity: 50%;*/
-  width: 100vw;
-  height: 100vh;
-  background-attachment: fixed;
+  /*height: 100%;*/
+  /*width: 100%;*/
+  min-height: 100vh;
+  min-width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #mainContext {
