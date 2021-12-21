@@ -41,6 +41,7 @@ export default {
   padding-top: 2px;
 }
 
+
 .page-link {
   display: inline-block;
   text-align: center;
@@ -69,6 +70,5 @@ export default {
 .page-link:hover:after {
   width: 90%;
 }
-
 
 </style>
