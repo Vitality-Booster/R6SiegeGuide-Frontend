@@ -57,8 +57,7 @@ export default {
   object-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /*background-image: url("../assets/background.jpg");*/
-  background-image: url("../assets/optionalBackground.jpg");
+  background-image: url("../assets/background.jpg");
   min-height: 100vh;
   min-width: 100vw;
 }
