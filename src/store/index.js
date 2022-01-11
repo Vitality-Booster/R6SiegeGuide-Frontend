@@ -31,6 +31,7 @@ const store = createStore({
     },
     actions: {
         async register(context, { email, password, username, fullName}) {
+
            // const response = await createUserWithEmailAndPassword(auth, email, password)
        await axios.post(process.env.VUE_APP_BASE_URL + `users/register`,
                {

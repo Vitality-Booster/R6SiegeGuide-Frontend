@@ -6,7 +6,7 @@ import Login from "../views/Login";
 // Vue.use(VueRouter)
 
 // check router properties in order to send people to the Login page in case, they are not logged in
-// (Probably wont need that after all, as I may have "Continue without login" functionality)
+// (Probably won't need that after all, as I may have "Continue without login" functionality)
 
 const routes = [
   {
