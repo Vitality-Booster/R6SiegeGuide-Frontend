@@ -11,8 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import router from './router'
-import {auth} from './firebase/config'
 
-createApp(App).use(router).use(store).use(BootstrapVue3).use(auth).mount('#app')
+createApp(App).use(router).use(store).use(BootstrapVue3).mount('#app')
 
 

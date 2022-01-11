@@ -1,5 +1,5 @@
 <template>
-  <Row class="d-flex justify-content-between" id="mainBar">
+  <div class="d-flex justify-content-between" id="mainBar">
     <BCol lg="3">
       <img class="photo p-2" alt="R6 logo" src="../assets/logo.png">
     </BCol>
@@ -28,7 +28,7 @@
         </li>
       </ul>
     </BCol>
-  </Row>
+  </div>
 </template>
 
 <script>
