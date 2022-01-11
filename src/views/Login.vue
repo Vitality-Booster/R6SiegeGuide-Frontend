@@ -1,9 +1,6 @@
 <template v-if="showLogin">
   <div id="logoBackground" class="Background" style="background-color: #20123C">
-    <div id="mainBackground">
-      <div v-if="error">
-        {{error}}
-      </div>
+    <div id="loginBackground" class="pt-5">
       <div class="pt-5">
         <h1 id="header">Login</h1>
 <!--        <BCol>-->
@@ -139,12 +136,8 @@ export default {
   background-size: cover;
 }
 
-#mainBackground {
-  /*background-color: #20123C;*/
-  background-color: #171917;
-  opacity: 75%;
-  /*height: 100%;*/
-  /*width: 100%;*/
+#loginBackground {
+  background-color: #4f450642;
   min-height: 100vh;
   min-width: 100vw;
   background-position: center;

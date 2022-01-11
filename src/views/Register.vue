@@ -1,10 +1,11 @@
 <template>
   <div id="logoBackground" class="Background" style="background-color: #20123C">
-    <div id="mainBackground">
-      <div id="mainContext">
+    <div  class="registerBackground pt-5">
+      <div class="pt-5">
         <h1 id="header">Register</h1>
-        <b-form id="loginInputField">
-          <b-container id="loginContainer">
+        <b-form class="pt-1 text-center" id="loginInputField">
+          <b-container >
+            <BCol class="pe-4">
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
 <!--                <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>-->
@@ -36,6 +37,7 @@
               </b-input-group-text>
               <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="repeatPassword" placeholder="Repeat password" type="password"></b-form-input>
             </b-input-group>
+            </BCol>
           </b-container>
           <br>
           <b-button id="loginButton" @click="registerUser" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
@@ -156,13 +158,10 @@ export default {
   background-size: cover;
 }
 
-#mainBackground {
-  /*background-color: #20123C;*/
-  background-color: #171917;
-  opacity: 75%;
+.registerBackground {
+  background-color: #4f450642;
   width: 100vw;
   height: 100vh;
-  z-index: -10;
 }
 
 #logoBackground {

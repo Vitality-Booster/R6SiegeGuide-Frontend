@@ -2,17 +2,15 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCXIRdhpv9pw5kPujBJewPzkJm44iqjfSg",
-    authDomain: "r6siege-guide.firebaseapp.com",
-    projectId: "r6siege-guide",
-    storageBucket: "r6siege-guide.appspot.com",
-    messagingSenderId: "272522559720",
-    appId: "1:272522559720:web:e3ed7658d8ad279a55895d",
-    measurementId: "G-C5K9M28S5N"
-};
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID
+}
 
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
 initializeApp(firebaseConfig);
 
 const auth = getAuth()
