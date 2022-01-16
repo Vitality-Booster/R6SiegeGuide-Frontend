@@ -4,12 +4,12 @@
       <router-link
         v-for="name in operatorsNames"
         :key="name"
+        :operator-name="name"
         :to="{name: 'singleOperator', params: {name: name}}">
         <OperatorBox :operator-name="name"/>
       </router-link>
-      <h1 :style="{color:'blue'}">This is the admin value {{admin}}</h1>
       <router-link
-          v-if="admin.valueOf() === false"
+          v-if="admin === true"
           :to="{name: 'singleOperator', params: {name: 'new'}}">
         <OperatorBox operator-name="new" />
       </router-link>
@@ -32,20 +32,29 @@ export default {
 
     const router = useRouter();
     const store = useStore();
+    const admin = ref()
 
-
-
-    const admin = ref(Boolean);
-
+    // if (store.state.admin == null) {
+    //   store.dispatch('checkIfAdmin')
+    //   admin.value = computed(store.state.admin);
+    // }
+    // else {
+    //   admin.value = store.state.admin
+    // }
     const checkAdmin = async () => {
       await store.dispatch('checkIfAdmin')
-          .then(res => {
-            admin.value = res
-            console.log("This is admin variablreeeeeeeeeeeeeeeeeeeeee: " + admin.value)
-          })
+      console.log("I got there")
+      admin.value = store.state.admin
     }
 
-    checkAdmin()
+    if (store.state.admin == null) {
+      checkAdmin()
+    }
+    else {
+      admin.value = store.state.admin
+    }
+
+    //checkAdmin()
     // const adminCheck = async () => {
     //   const admin = await store.dispatch('checkIfAdmin')
     //   console.log("Admin inside computed function: " + admin)

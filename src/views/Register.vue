@@ -52,10 +52,11 @@
 
 <script>
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
-// import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import {storage} from "../firebase/config";
+import {ref as storageRef, getDownloadURL} from "firebase/storage";
 
 export default {
   name: "Register",
@@ -72,16 +73,22 @@ export default {
     const store = useStore()
     const router = useRouter()
 
-    const loginBackgroundPic = store.state.loginBackgroundPic
+    const loginBackgroundPic = ref('')
 
-    // const backgroundImageRef = storageRef(storage, "website/loginPicture.jpg")
-    // getDownloadURL(backgroundImageRef)
-    //     .then(res => {
-    //       document.getElementById("logoBackground").style.backgroundImage = "url(" + res + ")"
-    //     })
-    //     .catch(err => {
-    //       alert(err.message)
-    //     })
+    if (store.state.loginBackgroundPic == null) {
+      const picRef = storageRef(storage, "website/loginPicture.jpg")
+      getDownloadURL(picRef)
+          .then(res => {
+            loginBackgroundPic.value = res
+            store.commit('setLoginBackgroundPic', res)
+          })
+          .catch(er => {
+            alert(er.message)
+          })
+    }
+    else {
+      loginBackgroundPic.value = store.state.loginBackgroundPic
+    }
 
     const registerUser = async () => {
       if (password.value === repeatPassword.value) {

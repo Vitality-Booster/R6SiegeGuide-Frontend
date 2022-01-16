@@ -33,8 +33,8 @@ import LoginRegisterLinks from "@/components/LoginRegisterLinks"
 import {ref} from "vue";
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-// import {storage} from "../firebase/config";
-// import {ref as storageRef, getDownloadURL} from "firebase/storage";
+import {storage} from "../firebase/config";
+import {ref as storageRef, getDownloadURL} from "firebase/storage";
 
 export default {
   name: 'Login',
@@ -43,10 +43,26 @@ export default {
     const password = ref('')
     const error = ref(null)
 
+    // smth
     const store = useStore();
     const router = useRouter()
 
-    const loginBackgroundPic = store.state.loginBackgroundPic
+    const loginBackgroundPic = ref('')
+
+    if (store.state.loginBackgroundPic == null) {
+      const picRef = storageRef(storage, "website/loginPicture.jpg")
+      getDownloadURL(picRef)
+      .then(res => {
+        loginBackgroundPic.value = res
+        store.commit('setLoginBackgroundPic', res)
+      })
+      .catch(er => {
+        alert(er.message)
+      })
+    }
+    else {
+      loginBackgroundPic.value = store.state.loginBackgroundPic
+    }
 
     const handleLogin = async () => {
       try {

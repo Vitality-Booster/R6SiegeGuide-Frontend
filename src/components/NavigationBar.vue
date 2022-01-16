@@ -35,6 +35,8 @@
 import Link from './Link'
 import {computed, ref} from "vue";
 import {useStore} from "vuex";
+import {getDownloadURL, ref as storageRef} from "firebase/storage";
+import {storage} from "../firebase/config";
 
 export default {
   name: "NavigationBar",
@@ -49,17 +51,26 @@ export default {
     const logout = ref('Logout');
     const login = ref('Login');
 
-    // const logoRef = storageRef(storage, "website/logo.png")
-    // getDownloadURL(logoRef)
-    // .then(res => {
-    //   document.getElementById("logoImage").setAttribute("src", res)
-    // })
-    // .catch(err => {
-    //   alert(err.message)
-    // })
     const store = useStore();
+    const logoPic = ref('')
 
-    const logoPic = store.state.logoPic
+    if (store.state.logoPic == null) {
+      const logoRef = storageRef(storage, "website/logo.png")
+      getDownloadURL(logoRef)
+          .then(res => {
+            logoPic.value = res
+            store.commit('setLogoPic', res)
+          })
+          .catch(err => {
+            alert(err.message)
+          })
+    }
+    else {
+      logoPic.value = store.state.logoPic
+    }
+
+
+
 
     const user = computed(() => store.state.user)
 
