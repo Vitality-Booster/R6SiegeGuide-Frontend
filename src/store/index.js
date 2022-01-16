@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 // firebase imports
 
-import { auth } from '../firebase/config'
+import {auth, storage} from '../firebase/config'
 import {
     //createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -12,13 +12,19 @@ import {
 } from 'firebase/auth'
 
 import axios from 'axios';
+import {ref as storageRef, getDownloadURL, list} from "firebase/storage";
+import jwtDecode from "jwt-decode";
 
 const store = createStore({
     state: {
         user: null,
         authIsReady: false,
         successfulCheck: false,
-        response: null
+        response: null,
+        mainBackgroundPic: null,
+        logoPic: null,
+        loginBackgroundPic: null,
+        picturesWereLoaded: false
     },
     mutations: {
         setUser(state, payload) {
@@ -27,7 +33,48 @@ const store = createStore({
         },
         setAuthIsReady(state, payload) {
             state.authIsReady = payload
-        }
+        },
+        loadWebsitePictures(state) {
+            console.log("The state of 'picturesWereLoaded' is: " + state.picturesWereLoaded)
+            if (!state.picturesWereLoaded) {
+                console.log("loading for pictures began working")
+                const websitePicturesRef = storageRef(storage, "website")
+                list(websitePicturesRef)
+                    .then(res => {
+                        res.items.forEach(pic => {
+                            getDownloadURL(pic)
+                                .then(url => {
+                                    console.log("That's the url: " + url)
+                                    switch (pic.name) {
+                                        case "background.jpg":
+                                            state.mainBackgroundPic = url
+                                            break
+                                        case "logo.png":
+                                            state.logoPic = url
+                                            break
+                                        case "loginPicture.jpg":
+                                            state.loginBackgroundPic = url
+                                            console.log("(in switch) login background picture equals to: " + state.loginBackgroundPic)
+                                            break
+                                    }
+                                })
+                        })
+                    })
+                    .then(() => {
+                        console.log("main background picture equals to: " + state.mainBackgroundPic)
+                        console.log("login background picture equals to: " + state.loginBackgroundPic)
+                        console.log("logo picture equals to: " + state.logoPic)
+                    })
+                    .catch(err => {
+                        alert(err.message)
+                    })
+                console.log("main background picture equals to: " + state.mainBackgroundPic)
+                console.log("login background picture equals to: " + state.loginBackgroundPic)
+                console.log("logo picture equals to: " + state.logoPic)
+                state.picturesWereLoaded = true;
+            }
+        },
+
     },
     actions: {
         async register(context, { email, password, username, fullName}) {
@@ -51,36 +98,19 @@ const store = createStore({
         async login(context, { email, password}) {
             // await context.dispatch('checkToken')
 
-            const response = await signInWithEmailAndPassword(auth, email, password)
-            if (response) {
-                //const user = response.user
-                console.log(response)
-                await axios.post(process.env.VUE_APP_BASE_URL + "users/getToken",
-                    {
-                        email: email,
-                        password: password
-                    })
-                    .then(res => {
-                        console.log("This is token that im passing: " + res.data.token)
-                        context.dispatch('signWithCustomToken', res.data.token)
-                    })
-                    .catch(er => {
-                        alert(er)
-                    })
-            }
-
-            //     await axios.post(process.env.VUE_APP_BASE_URL + "users/login",
-            //         {
-            //             email: email,
-            //         })
-            //         .then(res => {
-            //             user.username = res.username;
-            //             user.admin = res.admin
-            //         })
-            //     context.commit('setUser', user)
-            // } else {
-            //     throw new Error("Could not complete signup")
-            // }
+            await signInWithEmailAndPassword(auth, email, password)
+                .then(async () => {
+                    await axios.post(process.env.VUE_APP_BASE_URL + "users/login",
+                        {
+                            email: email
+                        })
+                        .then(res => {
+                            context.dispatch('signWithCustomToken', res.data.token)
+                        })
+                })
+                .catch(err => {
+                    alert(err.message)
+                })
         },
         async logout(context) {
             console.log("logout action")
@@ -91,7 +121,7 @@ const store = createStore({
         async checkToken(context) {
             auth.currentUser.getIdToken(true)
                 .then( async idToken => {
-                    await axios.post(process.env.VUE_APP_BASE_URL + "users/verifyToken", {
+                    await axios.post(process.env.VUE_APP_BASE_URL + "users/verify-token", {
                         idToken: idToken
                     })
                         .then(() => {
@@ -120,20 +150,33 @@ const store = createStore({
                 .catch((er) => {
                     alert(er.message)
                 });
+        },
+        async checkIfAdmin() {
+            let admin;
+            await auth.currentUser.getIdToken()
+                .then(async res => {
+                    const decoded = jwtDecode(res);
+                    admin = await decoded.admin;
+                    console.log("This is admin var type: " + admin.type)
+                    console.log("This is admin var to String: " + admin.toString())
+                })
+            console.log("Final admin var equals to: " + admin)
+            return admin
         }
     }
 })
 
 const unsub = onAuthStateChanged(auth, (user) => {
     store.commit('setAuthIsReady', true)
-    store.dispatch('checkToken')
-        .then(() => {
-            store.commit('setUser', user)
-        })
-        .catch((er) => {
-            alert(er.message)
-        })
-
+    if (auth.currentUser) {
+        store.dispatch('checkToken')
+            .then(() => {
+                store.commit('setUser', user)
+            })
+            .catch((er) => {
+                alert(er.message)
+            })
+    }
     unsub()
 })
 

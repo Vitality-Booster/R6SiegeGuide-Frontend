@@ -1,15 +1,9 @@
 <template v-if="showLogin">
-  <div id="logoBackground" class="Background" style="background-color: #20123C">
+  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
     <div id="loginBackground" class="pt-5">
       <div class="pt-5">
         <h1 id="header">Login</h1>
-<!--        <BCol>-->
-<!--          <BRow>-->
-<!--            <BButton>Some button</BButton>-->
-<!--          </BRow>-->
-<!--        </BCol>-->
         <div class="pt-1 text-center" id="loginInputField">
-<!--          <BContainer id="loginContainer">-->
           <BContainer class="">
             <BCol class="pe-4">
               <BInputGroup class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
@@ -39,6 +33,8 @@ import LoginRegisterLinks from "@/components/LoginRegisterLinks"
 import {ref} from "vue";
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+// import {storage} from "../firebase/config";
+// import {ref as storageRef, getDownloadURL} from "firebase/storage";
 
 export default {
   name: 'Login',
@@ -47,8 +43,10 @@ export default {
     const password = ref('')
     const error = ref(null)
 
-    const store = useStore()
+    const store = useStore();
     const router = useRouter()
+
+    const loginBackgroundPic = store.state.loginBackgroundPic
 
     const handleLogin = async () => {
       try {
@@ -62,7 +60,7 @@ export default {
       }
     }
 
-    return {email, password, handleLogin, error, store}
+    return {email, password, handleLogin, error, store, loginBackgroundPic}
   },
   components: {
     LoginRegisterLinks,
@@ -89,12 +87,6 @@ export default {
 #header {
   text-align: center;
   color: wheat;
-}
-
-#loginContainer {
-  text-align: center;
-  /*margin: auto;*/
-  margin-left: 12%;
 }
 
 .inputBox {
@@ -146,20 +138,12 @@ export default {
 }
 
 #logoBackground {
-  background-image: url("../assets/loginPicture.jpg");
-
-  /*opacity: 50%;*/
-  /*height: 100%;*/
-  /*width: 100%;*/
+  /*background-image: url("../assets/loginPicture.jpg");*/
   min-height: 100vh;
   min-width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-#mainContext {
-  padding-top: 9%;
 }
 
 /*End of background styles*/

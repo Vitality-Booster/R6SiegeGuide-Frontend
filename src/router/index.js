@@ -2,6 +2,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from "../views/Login";
+import Operators from "../views/Operators";
+import Generator from "../views/Generator";
+import Maps from "../views/Maps";
+import SingleOperator from "../views/SingleOperator";
 
 // Vue.use(VueRouter)
 
@@ -32,6 +36,27 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/operators',
+    name: 'Operators',
+    component: Operators
+  },
+  {
+      path: '/generator',
+      name: 'Generator',
+      component: Generator
+  },
+  {
+      path: '/maps',
+      name: 'Maps',
+      component: Maps
+  },
+  {
+    path: '/operators/:name',
+    name: 'singleOperator',
+    component: SingleOperator,
+    props: true
   }
 ]
 

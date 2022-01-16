@@ -1,19 +1,15 @@
 <template>
-<div>
   <MainBackground>
-    <h1>There are gonna be some news!</h1>
+
   </MainBackground>
-</div>
 </template>
 
 <script>
 import MainBackground from "../components/MainBackground";
-
 export default {
-  name: "Home",
-  components: {MainBackground},
+  name: "Maps",
+  components: {MainBackground}
 }
-
 </script>
 
 <style scoped>

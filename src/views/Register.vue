@@ -1,5 +1,5 @@
 <template>
-  <div id="logoBackground" class="Background" style="background-color: #20123C">
+  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
     <div  class="registerBackground pt-5">
       <div class="pt-5">
         <h1 id="header">Register</h1>
@@ -72,6 +72,17 @@ export default {
     const store = useStore()
     const router = useRouter()
 
+    const loginBackgroundPic = store.state.loginBackgroundPic
+
+    // const backgroundImageRef = storageRef(storage, "website/loginPicture.jpg")
+    // getDownloadURL(backgroundImageRef)
+    //     .then(res => {
+    //       document.getElementById("logoBackground").style.backgroundImage = "url(" + res + ")"
+    //     })
+    //     .catch(err => {
+    //       alert(err.message)
+    //     })
+
     const registerUser = async () => {
       if (password.value === repeatPassword.value) {
         try {
@@ -98,6 +109,7 @@ export default {
       password,
       repeatPassword,
       registerUser,
+      loginBackgroundPic
     }
   },
   data () {
@@ -116,13 +128,6 @@ export default {
 #header {
   text-align: center;
   color: wheat;
-}
-
-#loginContainer {
-  align-self: center;
-  text-align: center;
-  /*margin: auto;*/
-  margin-left: 12%;
 }
 
 .inputBox {
@@ -165,15 +170,10 @@ export default {
 }
 
 #logoBackground {
-  background-image: url("../assets/loginPicture.jpg");
   opacity: 100%;
   width: 100vw;
   height: 100vh;
   background-attachment: fixed;
-}
-
-#mainContext {
-  padding-top: 9%;
 }
 
 /*End of background styles*/
