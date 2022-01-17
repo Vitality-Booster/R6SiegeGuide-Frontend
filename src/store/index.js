@@ -42,7 +42,7 @@ const store = createStore({
         setLogoPic(state, payload) {
             state.logoPic = payload
         },
-        setAmin(state, payload) {
+        setAdmin(state, payload) {
             state.admin = payload
         }
     },
@@ -121,14 +121,13 @@ const store = createStore({
                     await auth.currentUser.getIdToken()
                         .then(async res => {
                             const decoded = jwtDecode(res);
-                            admin = await decoded.admin;
-                            context.state.admin = await decoded.admin;
+                            admin = decoded.admin;
+                            context.commit('setAdmin', admin);
                             clearInterval(interval)
                         })
                     return admin
                 }
             }, 1000)
-
         }
     }
 })
@@ -139,6 +138,7 @@ const unsub = onAuthStateChanged(auth, (user) => {
         store.dispatch('checkToken')
             .then(() => {
                 store.commit('setUser', user)
+                store.dispatch('checkIfAdmin')
             })
             .catch((er) => {
                 alert(er.message)

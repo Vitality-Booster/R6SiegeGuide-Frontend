@@ -23,7 +23,7 @@
       <BCol class="ms-3" lg="5">
         <BCard >
           <BCardText>Operator photo</BCardText>
-          <input type="file" v-model="operatorPic" title="Operator picture">
+<!--          <input type="file" v-model="operatorPic" title="Operator picture">-->
           <BFormGroup label="Name" label-for="nameInput">
             <BFormInput type="text" id="nameInput">
             </BFormInput>

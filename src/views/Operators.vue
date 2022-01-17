@@ -23,16 +23,21 @@ import axios from "axios";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import OperatorBox from "../components/OperatorBox";
-import {ref} from "vue";
+import {computed} from "vue";
+// import {auth} from "../firebase/config";
+// import jwtDecode from "jwt-decode";
+
 export default {
   name: "Operators",
   components: {OperatorBox, MainBackground},
   setup() {
+
     const operatorsNames = axios.get(process.env.VUE_APP_BASE_URL + "operators/get-all-names")
+    .then()
 
     const router = useRouter();
     const store = useStore();
-    const admin = ref()
+    const admin = computed(() => store.state.admin)
 
     // if (store.state.admin == null) {
     //   store.dispatch('checkIfAdmin')
@@ -41,18 +46,33 @@ export default {
     // else {
     //   admin.value = store.state.admin
     // }
-    const checkAdmin = async () => {
-      await store.dispatch('checkIfAdmin')
-      console.log("I got there")
-      admin.value = store.state.admin
-    }
 
-    if (store.state.admin == null) {
-      checkAdmin()
-    }
-    else {
-      admin.value = store.state.admin
-    }
+    // const checkAdmin = async () => {
+    //   await store.dispatch('checkIfAdmin')
+    //   console.log("I got there")
+    //   admin.value = store.state.admin
+    // }
+    //
+    // const adminRef = ref()
+    //
+    // const jwt = async() => {
+    //   auth.currentUser.getIdToken()
+    //       .then(res => {
+    //         const decoded = jwtDecode(res);
+    //         adminRef.value = decoded.admin;
+    //       })
+    // }
+    //
+    // jwt()
+
+
+
+    // if (store.state.admin == null) {
+    //   checkAdmin()
+    // }
+    // else {
+    //   admin.value = store.state.admin
+    // }
 
     //checkAdmin()
     // const adminCheck = async () => {

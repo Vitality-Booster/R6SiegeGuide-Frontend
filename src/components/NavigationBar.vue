@@ -70,8 +70,6 @@ export default {
     }
 
 
-
-
     const user = computed(() => store.state.user)
 
     const handleLogout = async () => {
