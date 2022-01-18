@@ -1,5 +1,5 @@
 <template>
-  <div id="logoBackground" class="Background" style="background-color: #20123C">
+  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
     <div  class="registerBackground pt-5">
       <div class="pt-5">
         <h1 id="header">Register</h1>
@@ -52,10 +52,11 @@
 
 <script>
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
-// import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import {storage} from "../firebase/config";
+import {ref as storageRef, getDownloadURL} from "firebase/storage";
 
 export default {
   name: "Register",
@@ -71,6 +72,23 @@ export default {
 
     const store = useStore()
     const router = useRouter()
+
+    const loginBackgroundPic = ref('')
+
+    if (store.state.loginBackgroundPic == null) {
+      const picRef = storageRef(storage, "website/loginPicture.jpg")
+      getDownloadURL(picRef)
+          .then(res => {
+            loginBackgroundPic.value = res
+            store.commit('setLoginBackgroundPic', res)
+          })
+          .catch(er => {
+            alert(er.message)
+          })
+    }
+    else {
+      loginBackgroundPic.value = store.state.loginBackgroundPic
+    }
 
     const registerUser = async () => {
       if (password.value === repeatPassword.value) {
@@ -98,6 +116,7 @@ export default {
       password,
       repeatPassword,
       registerUser,
+      loginBackgroundPic
     }
   },
   data () {
@@ -116,13 +135,6 @@ export default {
 #header {
   text-align: center;
   color: wheat;
-}
-
-#loginContainer {
-  align-self: center;
-  text-align: center;
-  /*margin: auto;*/
-  margin-left: 12%;
 }
 
 .inputBox {
@@ -165,15 +177,10 @@ export default {
 }
 
 #logoBackground {
-  background-image: url("../assets/loginPicture.jpg");
   opacity: 100%;
   width: 100vw;
   height: 100vh;
   background-attachment: fixed;
-}
-
-#mainContext {
-  padding-top: 9%;
 }
 
 /*End of background styles*/
