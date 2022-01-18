@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-between" id="mainBar">
     <BCol lg="3">
-      <img class="p-2" alt="R6 logo" id="logoImage" :src="logoPic">
+      <img class="p-2" v-if="logoPic.valueOf() !== ''" alt="R6 logo" id="logoImage" :src="logoPic" data-test="logo">
     </BCol>
     <BCol class="d-flex align-items-center justify-content-end pe-2" lg="9">
       <ul class="nav d-flex align-items-center">
@@ -18,12 +18,12 @@
           <router-link class="nav-link" to="/maps"><Link :link="maps"/></router-link>
         </li>
         <li class="nav-item" v-if="user">
-          <router-link class="nav-link" @click="handleLogout" to="/login"><Link :link="logout"/></router-link>
+          <router-link class="nav-link" @click="handleLogout" to="/login" data-test="logout"><Link :link="logout"/></router-link>
         </li>
         <li class="nav-item" v-else>
-          <router-link class="nav-link" to="/login"><Link :link="login"/></router-link>
+          <router-link class="nav-link" to="/login" data-test="login"><Link :link="login"/></router-link>
         </li>
-        <li class="nav-item d-flex align-items-center p-2" v-if="user">
+        <li class="nav-item d-flex align-items-center p-2" v-if="user" data-test="userIcon">
           <BIcon icon="person-circle" class="h2 m-0" style="color: wheat;"/>
         </li>
       </ul>
