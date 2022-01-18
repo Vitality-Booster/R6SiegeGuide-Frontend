@@ -66,8 +66,6 @@ const store = createStore({
                 })
         },
         async login(context, {email, password}) {
-            // await context.dispatch('checkToken')
-
             await signInWithEmailAndPassword(auth, email, password)
                 .then(async () => {
                     await axios.post(process.env.VUE_APP_BASE_URL + "users/login",
