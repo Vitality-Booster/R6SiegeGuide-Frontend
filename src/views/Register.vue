@@ -3,55 +3,62 @@
        :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')',
        opacity: '100%', width: '100vw', height: '100vh', backgroundAttachment: 'fixed',
        backgroundPosition: 'center', objectPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
-<!--    <div id="registerBackground" class="pt-5">-->
-<!--      <div class="pt-5">-->
-<!--        <h1 id="header">Register</h1>-->
-<!--        <div class="form pt-1 text-center" id="loginInputField">-->
-<!--          <div class="container" >-->
-<!--            <div class="col pe-4">-->
-<!--            <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">-->
-<!--              <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">-->
-<!--                <BIconFileEarmarkPerson class="inputBoxIcon" aria-hidden="true" />-->
-<!--              </div>-->
-<!--              <input class="form-control UserInfoButton" :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" v-model="fullName" placeholder="Full name" type="text">-->
-<!--            </div>-->
-<!--            <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">-->
-<!--              <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">-->
-<!--                <BIconPerson icon="person" class="inputBoxIcon" aria-hidden="true" :style="{opacity: '100%'}"></BIconPerson>-->
-<!--              </div>-->
-<!--              <input :style="{borderRadius: '100px' }" class="form-control UserInfoButton" v-model="username" placeholder="Username" type="text">-->
-<!--            </div>-->
-<!--            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">-->
-<!--              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">-->
-<!--                <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>-->
-<!--              </b-input-group-text>-->
-<!--              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="email" placeholder="Email" type="email"></b-form-input>-->
-<!--            </b-input-group>-->
-<!--            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">-->
-<!--              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">-->
-<!--                <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>-->
-<!--              </b-input-group-text>-->
-<!--              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="password" placeholder="Password" type="password"></b-form-input>-->
-<!--            </b-input-group>-->
-<!--            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">-->
-<!--              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">-->
-<!--                <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true"></b-icon>-->
-<!--              </b-input-group-text>-->
-<!--              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="repeatPassword" placeholder="Repeat password" type="password"></b-form-input>-->
-<!--            </b-input-group>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <br>-->
-<!--          <b-button id="loginButton" @click="registerUser" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>-->
-<!--        </div>-->
-<!--        <LoginRegisterLinks />-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="pt-5" style="background-color: #4f450642; width: 100vw; height: 100vh;">
+      <div class="pt-5">
+        <h1 class="ml-3" style="text-align: center; color: wheat;">Register</h1>
+        <div class="form pt-1 text-center" style="text-align: center; padding-top: 1%;">
+          <div class="container" >
+            <div class="col pe-4">
+            <div class="input-group pt-4"
+                 :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
+              <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
+                <BIconFileEarmarkPerson style="opacity: 70%; border: transparent; color: white;"
+                                         aria-hidden="true" />
+              </div>
+              <input class="form-control" :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }" v-model="fullName" placeholder="Full name" type="text">
+            </div>
+            <div class="input-group pt-4"
+                 :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
+              <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">
+                <BIconPerson icon="person" style="opacity: 70%; border: transparent; color: white;" aria-hidden="true" :style="{opacity: '100%'}"></BIconPerson>
+              </div>
+              <input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }" class="form-control" v-model="username" placeholder="Username" type="text">
+            </div>
+            <b-input-group class="pt-4"
+                           :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
+              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
+                <b-icon icon="envelope" style="opacity: 70%; border: transparent; color: white;" aria-hidden="true"></b-icon>
+              </b-input-group-text>
+              <b-form-input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }" v-model="email" placeholder="Email" type="email"></b-form-input>
+            </b-input-group>
+            <b-input-group class="pt-4"
+                           :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
+              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
+                <b-icon icon="lock" style="opacity: 70%; border: transparent; color: white;" aria-hidden="true"></b-icon>
+              </b-input-group-text>
+              <b-form-input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }" v-model="password" placeholder="Password" type="password"></b-form-input>
+            </b-input-group>
+            <b-input-group class="pt-4"
+                           :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
+              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
+                <b-icon icon="lock" style="opacity: 70%; border: transparent; color: white;" aria-hidden="true"></b-icon>
+              </b-input-group-text>
+              <b-form-input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }" v-model="repeatPassword" placeholder="Repeat password" type="password"></b-form-input>
+            </b-input-group>
+            </div>
+          </div>
+          <b-button class="mt-4 ml-3" @click="registerUser"
+                    :style="{borderRadius: '100px', width: '120px',
+                    backgroundColor: 'black', color: 'bisque'}">Register</b-button>
+        </div>
+        <LoginRegisterLinks class="ml-3" :is-register="true"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// import LoginRegisterLinks from "@/components/LoginRegisterLinks";
+import LoginRegisterLinks from "@/components/LoginRegisterLinks";
 import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -61,7 +68,7 @@ import {ref as storageRef, getDownloadURL} from "firebase/storage";
 export default {
   name: "Register",
   components: {
-    // LoginRegisterLinks
+    LoginRegisterLinks
   },
   setup () {
     const fullName = ref('')
@@ -126,62 +133,5 @@ export default {
 </script>
 
 <style scoped>
-
-#header {
-  text-align: center;
-  color: wheat;
-}
-
-.inputBox {
-  margin-right: 50px;
-  padding-top: 25px;
-}
-
-.UserInfoButton, .inputBoxIcon {
-  opacity: 70%;
-  border: transparent;
-}
-
-.inputBoxIcon {
-  color: white;
-}
-
-#loginInputField {
-  text-align: center;
-  padding-top: 1%;
-}
-
-#loginButton {
-  background-color: black;
-  color: bisque;
-  z-index: 1000;
-}
-
-/*Background styles*/
-/*.Background {*/
-/*  background-position: center;*/
-/*  object-position: center;*/
-/*  background-repeat: no-repeat;*/
-/*  background-size: cover;*/
-/*}*/
-
-#registerBackground {
-  background-color: #4f450642;
-  width: 100vw;
-  height: 100vh;
-}
-
-#logoBackground {
-  opacity: 100%;
-  width: 100vw;
-  height: 100vh;
-  background-attachment: fixed;
-  background-position: center;
-  object-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/*End of background styles*/
 
 </style>

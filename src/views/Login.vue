@@ -1,13 +1,16 @@
 <template>
-  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
+  <div
+      :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')',
+       opacity: '100%', width: '100vw', height: '100vh', backgroundAttachment: 'fixed',
+       backgroundPosition: 'center', objectPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
     <div id="loginBackground" class="pt-5">
       <div class="pt-5">
-        <h1 id="header">Login</h1>
-        <div class="pt-1 text-center" id="loginInputField">
+        <h1 style="text-align: center; color: wheat;">Login</h1>
+        <div class="pt-1 text-center" style="text-align: center; padding-top: 1%;">
           <div class="container">
-            <div class="col pe-4">
-              <div class="input-group pt-4 inputBox"
-                   :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+            <div class="col pr-4">
+              <div class="input-group pt-4"
+                   :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
                 <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
                   <BIconEnvelope aria-hidden="true"
                                  style="color: white; opacity: 70%; border: transparent;" />
@@ -15,7 +18,8 @@
                 <input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }"
                        class="form-control" v-model="email" placeholder="Email" type="email">
               </div>
-              <div class="input-group pt-4 inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <div class="input-group pt-4"
+                   :style="{width: '25%', minWidth: '225px', margin: 'auto', color: 'white'}">
                 <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">
                   <BIconLock aria-hidden="true"
                              style="color: white; opacity: 70%; border: transparent;" />
@@ -24,7 +28,8 @@
               </div>
             </div>
           </div>
-          <button class="btn" type="button" id="loginButton" @click="handleLogin" :style="{borderRadius: '100px', width: '120px'}">Log in</button>
+          <BButton class="mt-4" type="button" @click="handleLogin"
+                  :style="{borderRadius: '100px', width: '120px', backgroundColor: 'black', color: 'bisque'}">Log in</BButton>
         </div>
         <LoginRegisterLinks />
       </div>
@@ -102,23 +107,6 @@ export default {
 </script>
 
 <style scoped>
-
-#header {
-  text-align: center;
-  color: wheat;
-}
-
-#loginInputField {
-  text-align: center;
-  padding-top: 1%;
-}
-
-#loginButton {
-  background-color: black;
-  color: bisque;
-  z-index: 1000;
-  margin-top: 25px;
-}
 
 /*Background styles*/
 .Background {
