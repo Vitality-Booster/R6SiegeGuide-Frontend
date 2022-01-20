@@ -10,7 +10,8 @@
                 <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
                   <BIconEnvelope class="inputBoxIcon" aria-hidden="true" />
                 </div>
-                <input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="form-control UserInfoButton" v-model="email" placeholder="Email" type="email">
+                <input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center', opacity: '70%', border: 'transparent' }"
+                       class="form-control" v-model="email" placeholder="Email" type="email">
               </div>
               <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
                 <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">
@@ -43,7 +44,6 @@ export default {
     const password = ref('')
     const error = ref(null)
 
-    // smth
     const store = useStore();
     const router = useRouter()
 
