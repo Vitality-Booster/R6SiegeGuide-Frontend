@@ -6,18 +6,21 @@
         <div class="pt-1 text-center" id="loginInputField">
           <div class="container">
             <div class="col pe-4">
-              <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <div class="input-group pt-4 inputBox"
+                   :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
                 <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
-                  <BIconEnvelope class="inputBoxIcon" aria-hidden="true" />
+                  <BIconEnvelope aria-hidden="true"
+                                 style="color: white; opacity: 70%; border: transparent;" />
                 </div>
-                <input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center', opacity: '70%', border: 'transparent' }"
+                <input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }"
                        class="form-control" v-model="email" placeholder="Email" type="email">
               </div>
-              <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <div class="input-group pt-4 inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
                 <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">
-                  <BIconLock class="inputBoxIcon" aria-hidden="true" />
+                  <BIconLock aria-hidden="true"
+                             style="color: white; opacity: 70%; border: transparent;" />
                 </div>
-                <input :style="{borderRadius: '100px' }" class="form-control UserInfoButton" v-model="password" placeholder="Password" type="password">
+                <input :style="{borderRadius: '100px', opacity: '70%', border: 'transparent' }" class="form-control" v-model="password" placeholder="Password" type="password">
               </div>
             </div>
           </div>
@@ -103,25 +106,6 @@ export default {
 #header {
   text-align: center;
   color: wheat;
-}
-
-.inputBox {
-  margin-right: 50px;
-  padding-top: 25px;
-}
-
-.UserInfoButton, .inputBoxIcon {
-  opacity: 70%;
-  border: transparent;
-}
-
-.inputBoxIcon {
-  color: white;
-}
-
-.inputBox {
-  margin-right: 50px;
-
 }
 
 #loginInputField {

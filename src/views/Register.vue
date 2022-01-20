@@ -1,6 +1,6 @@
 <template>
   <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
-    <div  class="registerBackground pt-5">
+    <div id="registerBackground" class="pt-5">
       <div class="pt-5">
         <h1 id="header">Register</h1>
         <div class="form pt-1 text-center" id="loginInputField">
@@ -170,7 +170,7 @@ export default {
   background-size: cover;
 }
 
-.registerBackground {
+#registerBackground {
   background-color: #4f450642;
   width: 100vw;
   height: 100vh;
