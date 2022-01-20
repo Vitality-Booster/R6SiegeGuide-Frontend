@@ -1,7 +1,7 @@
 import {mount} from "@vue/test-utils";
-import Operators from "../../src/views/Operators";
+import Operators from "../../../src/views/Operators";
 import {createStore} from "vuex";
-import OperatorBox from "../../src/components/OperatorBox";
+import OperatorBox from "../../../src/components/OperatorBox";
 
 describe('test for Operators component', function () {
     it('should not show OperatorBox element', function () {
