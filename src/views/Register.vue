@@ -3,22 +3,22 @@
     <div  class="registerBackground pt-5">
       <div class="pt-5">
         <h1 id="header">Register</h1>
-        <b-form class="pt-1 text-center" id="loginInputField">
-          <b-container >
-            <BCol class="pe-4">
-            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
-              <b-input-group-text is-text :style="{background: 'transparent', border: 'transparent'}">
+        <div class="form pt-1 text-center" id="loginInputField">
+          <div class="container" >
+            <div class="col pe-4">
+            <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
 <!--                <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>-->
-                <BIcon icon="file-earmark-person" class="inputBoxIcon" aria-hidden="true" />
-              </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="fullName" placeholder="Full name" type="text"></b-form-input>
-            </b-input-group>
-            <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
-              <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
-                <b-icon icon="person" class="inputBoxIcon" aria-hidden="true" :style="{opacity: '100%'}"></b-icon>
-              </b-input-group-text>
-              <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="username" placeholder="Username" type="text"></b-form-input>
-            </b-input-group>
+                <BIconFileEarmarkPerson class="inputBoxIcon" aria-hidden="true" />
+              </div>
+              <input class="form-control UserInfoButton" :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" v-model="fullName" placeholder="Full name" type="text">
+            </div>
+            <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+              <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">
+                <BIconPerson icon="person" class="inputBoxIcon" aria-hidden="true" :style="{opacity: '100%'}"></BIconPerson>
+              </div>
+              <input :style="{borderRadius: '100px' }" class="form-control UserInfoButton" v-model="username" placeholder="Username" type="text">
+            </div>
             <b-input-group class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <b-input-group-text is-text :style="{border: 'none', background: 'transparent'}">
                 <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true"></b-icon>
@@ -37,11 +37,11 @@
               </b-input-group-text>
               <b-form-input :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="repeatPassword" placeholder="Repeat password" type="password"></b-form-input>
             </b-input-group>
-            </BCol>
-          </b-container>
+            </div>
+          </div>
           <br>
           <b-button id="loginButton" @click="registerUser" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
-        </b-form>
+        </div>
         <LoginRegisterLinks :is-register="true">
 
         </LoginRegisterLinks>

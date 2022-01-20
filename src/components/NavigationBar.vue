@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between" id="mainBar" :style="{backgroundColor: 'green', opacity: '90%'}">
+  <div class="d-flex justify-content-between" :style="{backgroundColor: '#1c1815', opacity: '90%'}">
     <div class="col" lg="3">
       <img class="p-2" v-if="logoPic.valueOf() !== ''" alt="R6 logo" id="logoImage" :src="logoPic" data-test="logo">
     </div>
@@ -86,11 +86,6 @@ export default {
 </script>
 
 <style scoped>
-
-#mainBar {
-  background-color: #1c1815;
-  opacity: 90%;
-}
 
 #logoImage {
   width: 70px;
