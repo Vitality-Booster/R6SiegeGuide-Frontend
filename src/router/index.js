@@ -6,6 +6,7 @@ import Operators from "../views/Operators";
 import Generator from "../views/Generator";
 import Maps from "../views/Maps";
 import SingleOperator from "../views/SingleOperator";
+import Register from "../views/Register";
 
 // Vue.use(VueRouter)
 
@@ -27,7 +28,8 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import (/* webpackChunkName: "register" */ "@/views/Register")
+    component: Register
+    // component: () => import (/* webpackChunkName: "register" */ "@/views/Register")
   },
   {
     path: '/about',
