@@ -58,9 +58,8 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter()
-    const isLoading = computed(() => store.state.isLoading)
-
     store.commit('setIsLoading', true);
+    const isLoading = computed(() => store.state.isLoading)
 
     const email = ref('')
     const password = ref('')
