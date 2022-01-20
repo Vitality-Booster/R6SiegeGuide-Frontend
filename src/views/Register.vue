@@ -8,7 +8,6 @@
             <div class="col pe-4">
             <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
               <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
-<!--                <b-icon-file-earmark-person class="inputBoxIcon" aria-hidden="true"></b-icon-file-earmark-person>-->
                 <BIconFileEarmarkPerson class="inputBoxIcon" aria-hidden="true" />
               </div>
               <input class="form-control UserInfoButton" :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" v-model="fullName" placeholder="Full name" type="text">
@@ -42,9 +41,7 @@
           <br>
           <b-button id="loginButton" @click="registerUser" :style="{borderRadius: '100px', width: '120px'}">Register</b-button>
         </div>
-        <LoginRegisterLinks :is-register="true">
-
-        </LoginRegisterLinks>
+        <LoginRegisterLinks />
       </div>
     </div>
   </div>
@@ -117,11 +114,6 @@ export default {
       repeatPassword,
       registerUser,
       loginBackgroundPic
-    }
-  },
-  data () {
-    return {
-
     }
   },
   methods: {
