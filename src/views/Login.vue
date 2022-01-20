@@ -4,23 +4,23 @@
       <div class="pt-5">
         <h1 id="header">Login</h1>
         <div class="pt-1 text-center" id="loginInputField">
-          <BContainer class="">
-            <BCol class="pe-4">
-              <BInputGroup class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
-                <BInputGroupText is-text :style="{background: 'transparent', border: 'transparent'}">
-                  <b-icon icon="envelope" class="inputBoxIcon" aria-hidden="true" />
-                </BInputGroupText>
-                <BFormInput :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="UserInfoButton" v-model="email" placeholder="Email" type="email"></BFormInput>
-              </BInputGroup>
-              <BInputGroup class="inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
-                <BInputGroupText is-text :style="{border: 'none', background: 'transparent'}">
-                  <b-icon icon="lock" class="inputBoxIcon" aria-hidden="true" />
-                </BInputGroupText>
-                <BFormInput :style="{borderRadius: '100px' }" class="UserInfoButton" v-model="password" placeholder="Password" type="password"></BFormInput>
-              </BInputGroup>
-            </BCol>
-          </BContainer>
-          <BButton id="loginButton" @click="handleLogin" :style="{borderRadius: '100px', width: '120px'}">Log in</BButton>
+          <div class="container">
+            <div class="col pe-4">
+              <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+                <div class="input-group-text" :style="{background: 'transparent', border: 'transparent'}">
+                  <BIconEnvelope class="inputBoxIcon" aria-hidden="true" />
+                </div>
+                <input :style="{borderRadius: '100px', margin: 'auto', alignSelf: 'center' }" class="form-control UserInfoButton" v-model="email" placeholder="Email" type="email">
+              </div>
+              <div class="input-group inputBox" :style="{width: '25%', minWidth: '225px', margin: 'auto'}">
+                <div class="input-group-text" :style="{border: 'none', background: 'transparent'}">
+                  <BIconLock class="inputBoxIcon" aria-hidden="true" />
+                </div>
+                <input :style="{borderRadius: '100px' }" class="form-control UserInfoButton" v-model="password" placeholder="Password" type="password">
+              </div>
+            </div>
+          </div>
+          <button class="btn" type="button" id="loginButton" @click="handleLogin" :style="{borderRadius: '100px', width: '120px'}">Log in</button>
         </div>
         <LoginRegisterLinks />
       </div>
