@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>Something here!</h1>
-  </div>
-<!--  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">-->
+  <div id="logoBackground" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
 <!--    <div id="registerBackground" class="pt-5">-->
 <!--      <div class="pt-5">-->
 <!--        <h1 id="header">Register</h1>-->
@@ -47,7 +44,7 @@
 <!--        <LoginRegisterLinks />-->
 <!--      </div>-->
 <!--    </div>-->
-<!--  </div>-->
+  </div>
 </template>
 
 <script>
@@ -158,12 +155,12 @@ export default {
 }
 
 /*Background styles*/
-.Background {
-  background-position: center;
-  object-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+/*.Background {*/
+/*  background-position: center;*/
+/*  object-position: center;*/
+/*  background-repeat: no-repeat;*/
+/*  background-size: cover;*/
+/*}*/
 
 #registerBackground {
   background-color: #4f450642;
@@ -176,6 +173,10 @@ export default {
   width: 100vw;
   height: 100vh;
   background-attachment: fixed;
+  background-position: center;
+  object-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /*End of background styles*/
