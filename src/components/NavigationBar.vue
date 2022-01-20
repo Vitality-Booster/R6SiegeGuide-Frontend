@@ -1,9 +1,9 @@
 <template>
   <div class="d-flex justify-content-between" id="mainBar">
-    <BCol lg="3">
+    <div class="col" lg="3">
       <img class="p-2" v-if="logoPic.valueOf() !== ''" alt="R6 logo" id="logoImage" :src="logoPic" data-test="logo">
-    </BCol>
-    <BCol class="d-flex align-items-center justify-content-end pe-2" lg="9">
+    </div>
+    <div class="col d-flex align-items-center justify-content-end pe-2" lg="9">
       <ul class="nav d-flex align-items-center">
         <li class="nav-item">
           <router-link class="nav-link" to="/"><Link :link=home /></router-link>
@@ -24,10 +24,10 @@
           <router-link class="nav-link" to="/login" data-test="login"><Link :link="login"/></router-link>
         </li>
         <li class="nav-item d-flex align-items-center p-2" v-if="user" data-test="userIcon">
-          <BIcon icon="person-circle" class="h2 m-0" style="color: wheat;"/>
+          <BIconPersonCircle class="h2 m-0" style="color: wheat;"/>
         </li>
       </ul>
-    </BCol>
+    </div>
   </div>
 </template>
 
