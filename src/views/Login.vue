@@ -1,4 +1,4 @@
-<template v-if="showLogin">
+<template>
   <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
     <div id="loginBackground" class="pt-5">
       <div class="pt-5">
