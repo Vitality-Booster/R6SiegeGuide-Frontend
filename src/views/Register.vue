@@ -1,5 +1,8 @@
 <template>
-  <div id="logoBackground" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
+  <div
+       :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')',
+       opacity: '100%', width: '100vw', height: '100vh', backgroundAttachment: 'fixed',
+       backgroundPosition: 'center', objectPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
 <!--    <div id="registerBackground" class="pt-5">-->
 <!--      <div class="pt-5">-->
 <!--        <h1 id="header">Register</h1>-->

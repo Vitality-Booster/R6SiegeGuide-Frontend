@@ -48,17 +48,6 @@
           </BFormGroup>
           <BFormCheckboxGroup :options="health">
           </BFormCheckboxGroup>
-          <BRow>
-            <BCol lg="4">
-              <BFormRating variant="info" class="mb-2"></BFormRating>
-            </BCol>
-            <BCol lg="4">
-              <b-form-rating variant="info" class="mb-2"></b-form-rating>
-            </BCol>
-            <BCol lg="4">
-              <b-form-rating variant="info" class="mb-2"></b-form-rating>
-            </BCol>
-          </BRow>
         </BCard>
       </BCol>
     </BRow>
