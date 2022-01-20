@@ -1,6 +1,9 @@
 <template>
-  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">
-    <div id="registerBackground" class="pt-5">
+  <div>
+    <h1>Something here!</h1>
+  </div>
+<!--  <div id="logoBackground" class="Background" :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')'}">-->
+<!--    <div id="registerBackground" class="pt-5">-->
 <!--      <div class="pt-5">-->
 <!--        <h1 id="header">Register</h1>-->
 <!--        <div class="form pt-1 text-center" id="loginInputField">-->
@@ -43,8 +46,8 @@
 <!--        </div>-->
 <!--        <LoginRegisterLinks />-->
 <!--      </div>-->
-    </div>
-  </div>
+<!--    </div>-->
+<!--  </div>-->
 </template>
 
 <script>
