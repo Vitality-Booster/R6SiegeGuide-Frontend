@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between" id="mainBar">
+  <div class="d-flex justify-content-between" id="mainBar" :style="{backgroundColor: 'green', opacity: '90%'}">
     <BCol lg="3">
       <img class="p-2" v-if="logoPic.valueOf() !== ''" alt="R6 logo" id="logoImage" :src="logoPic" data-test="logo">
     </BCol>
