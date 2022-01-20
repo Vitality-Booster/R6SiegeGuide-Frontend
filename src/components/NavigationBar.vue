@@ -1,9 +1,9 @@
 <template>
   <div class="d-flex justify-content-between" :style="{backgroundColor: '#1c1815', opacity: '90%'}">
-    <div class="col-sm-2">
+    <BCol sm="2">
       <img class="p-2" v-if="logoPic.valueOf() !== ''" alt="R6 logo" id="logoImage" :src="logoPic" data-test="logo">
-    </div>
-    <div class="col-sm-10 d-flex align-items-center justify-content-end pe-2">
+    </BCol>
+    <BCol sm="10" class="d-flex align-items-center justify-content-end pe-2">
       <ul class="nav d-flex align-items-center">
         <li class="nav-item">
           <router-link class="nav-link" to="/"><Link :link=home /></router-link>
@@ -27,7 +27,7 @@
           <BIconPersonCircle class="h2 m-0" style="color: wheat;"/>
         </li>
       </ul>
-    </div>
+    </BCol>
   </div>
 </template>
 
