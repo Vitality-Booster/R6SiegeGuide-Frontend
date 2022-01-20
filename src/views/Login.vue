@@ -1,5 +1,12 @@
 <template>
-  <div
+  <div v-if="isLoading" style="width: 100vw; height: 100vh" class="d-flex justify-content-center">
+    <looping-rhombuses-spinner class="align-self-center"
+                               :animation-duration="2500"
+                               :rhombus-size="15"
+                               :color="'#ff1d5e'"
+    />
+  </div>
+  <div v-else
       :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')',
        opacity: '100%', width: '100vw', height: '100vh', backgroundAttachment: 'fixed',
        backgroundPosition: 'center', objectPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
@@ -39,38 +46,47 @@
 
 <script>
 import LoginRegisterLinks from "@/components/LoginRegisterLinks"
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import {storage} from "../firebase/config";
 import {ref as storageRef, getDownloadURL} from "firebase/storage";
+import {LoopingRhombusesSpinner} from 'epic-spinners'
 
 export default {
   name: 'Login',
   setup() {
+    const store = useStore();
+    const router = useRouter()
+    const isLoading = computed(() => store.state.isLoading)
+
+    store.commit('setIsLoading', true);
+
     const email = ref('')
     const password = ref('')
     const error = ref(null)
 
-    const store = useStore();
-    const router = useRouter()
-
     const loginBackgroundPic = ref('')
 
-    if (store.state.loginBackgroundPic == null) {
-      const picRef = storageRef(storage, "website/loginPicture.jpg")
-      getDownloadURL(picRef)
-      .then(res => {
-        loginBackgroundPic.value = res
-        store.commit('setLoginBackgroundPic', res)
-      })
-      .catch(er => {
-        alert(er.message)
-      })
+    const loadEverything = async () => {
+      if (store.state.loginBackgroundPic == null) {
+        const picRef = storageRef(storage, "website/loginPicture.jpg")
+        await getDownloadURL(picRef)
+            .then(res => {
+              loginBackgroundPic.value = res
+              store.commit('setLoginBackgroundPic', res)
+            })
+            .catch(er => {
+              alert(er.message)
+            })
+      }
+      else {
+        loginBackgroundPic.value = store.state.loginBackgroundPic
+      }
+      store.commit('setIsLoading', false)
+      console.log("The state was changed")
     }
-    else {
-      loginBackgroundPic.value = store.state.loginBackgroundPic
-    }
+
 
     const handleLogin = async () => {
       try {
@@ -84,10 +100,12 @@ export default {
       }
     }
 
-    return {email, password, handleLogin, error, store, loginBackgroundPic}
+    loadEverything()
+    return {email, password, handleLogin, error, store, loginBackgroundPic, isLoading}
   },
   components: {
     LoginRegisterLinks,
+    LoopingRhombusesSpinner
   },
   data () {
     return {

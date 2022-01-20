@@ -24,7 +24,8 @@ const store = createStore({
         logoPic: null,
         loginBackgroundPic: null,
         picturesWereLoaded: false,
-        admin: null
+        admin: null,
+        isLoading: true,
     },
     mutations: {
         setUser(state, payload) {
@@ -44,6 +45,9 @@ const store = createStore({
         },
         setAdmin(state, payload) {
             state.admin = payload
+        },
+        setIsLoading(state, payload) {
+            state.isLoading = payload
         }
     },
     actions: {
