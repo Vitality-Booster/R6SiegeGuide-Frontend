@@ -1,14 +1,7 @@
 <template>
 <div>
-  <div v-if="isLoading" style="width: 100vw; height: 100vh" class="d-flex justify-content-center">
-    <looping-rhombuses-spinner class="align-self-center"
-        :animation-duration="2500"
-        :rhombus-size="15"
-        :color="'#ff1d5e'"
-    />
-  </div>
-  <MainBackground v-else>
-    <h1>There are gonna be some news!</h1>
+  <Spinner v-if="loadingComponents < 3"></Spinner>
+  <MainBackground v-show="loadingComponents >= 3">
   </MainBackground>
 </div>
 </template>
@@ -17,18 +10,20 @@
 import MainBackground from "../components/MainBackground";
 import {useStore} from "vuex";
 import {computed} from "vue";
-import {LoopingRhombusesSpinner} from 'epic-spinners'
+import Spinner from "../components/Spinner";
 export default {
   name: "Home",
   components: {
     MainBackground,
-    LoopingRhombusesSpinner
+    Spinner
   },
   setup() {
     const store = useStore();
-    const isLoading = computed(() => store.state.isLoading);
+    store.commit('resetLoadingComponents')
+    const loadingComponents = computed(() => store.state.loadingComponents);
 
-    return {isLoading}
+    store.commit('addLoadingComponent', 1)
+    return {loadingComponents}
   }
 }
 

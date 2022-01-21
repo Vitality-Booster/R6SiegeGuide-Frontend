@@ -1,5 +1,7 @@
 <template>
-  <div
+  <div>
+    <Spinner v-if="loadingComponents < 1"></Spinner>
+  <div v-show="loadingComponents >= 1"
        :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')',
        opacity: '100%', width: '100vw', height: '100vh', backgroundAttachment: 'fixed',
        backgroundPosition: 'center', objectPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
@@ -55,31 +57,34 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 import LoginRegisterLinks from "@/components/LoginRegisterLinks";
-import { ref } from "vue";
+import {computed, ref} from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import {storage} from "../firebase/config";
 import {ref as storageRef, getDownloadURL} from "firebase/storage";
+import Spinner from "../components/Spinner";
 
 export default {
   name: "Register",
   components: {
+    Spinner,
     LoginRegisterLinks
   },
   setup () {
+    const store = useStore()
+    store.commit('resetLoadingComponents')
+    const loadingComponents = computed(() => store.state.loadingComponents)
+    const router = useRouter()
     const fullName = ref('')
     const username = ref('')
     const email = ref('')
     const password = ref('')
     const repeatPassword = ref('')
-
-    const store = useStore()
-    const router = useRouter()
-
     const loginBackgroundPic = ref('')
 
     if (store.state.loginBackgroundPic == null) {
@@ -92,9 +97,13 @@ export default {
           .catch(er => {
             alert(er.message)
           })
+          .finally(() => {
+            store.commit('addLoadingComponent', 1);
+          })
     }
     else {
       loginBackgroundPic.value = store.state.loginBackgroundPic
+      store.commit('addLoadingComponent', 1);
     }
 
     const registerUser = async () => {
@@ -123,7 +132,8 @@ export default {
       password,
       repeatPassword,
       registerUser,
-      loginBackgroundPic
+      loginBackgroundPic,
+      loadingComponents
     }
   },
   methods: {

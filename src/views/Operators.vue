@@ -1,4 +1,5 @@
 <template>
+  <div>
   <MainBackground>
     <BCardGroup>
       <router-link
@@ -15,6 +16,7 @@
       </router-link>
     </BCardGroup>
   </MainBackground>
+  </div>
 </template>
 
 <script>
@@ -24,8 +26,6 @@ import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import OperatorBox from "../components/OperatorBox";
 import {computed, ref} from "vue";
-// import {auth} from "../firebase/config";
-// import jwtDecode from "jwt-decode";
 
 export default {
   name: "Operators",

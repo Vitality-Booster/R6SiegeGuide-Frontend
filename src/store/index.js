@@ -25,7 +25,7 @@ const store = createStore({
         loginBackgroundPic: null,
         picturesWereLoaded: false,
         admin: null,
-        isLoading: true,
+        loadingComponents: 0
     },
     mutations: {
         setUser(state, payload) {
@@ -46,8 +46,11 @@ const store = createStore({
         setAdmin(state, payload) {
             state.admin = payload
         },
-        setIsLoading(state, payload) {
-            state.isLoading = payload
+        addLoadingComponent(state, payload) {
+            state.loadingComponents += payload
+        },
+        resetLoadingComponents(state) {
+            state.loadingComponents = 0
         }
     },
     actions: {
@@ -111,6 +114,7 @@ const store = createStore({
             signInWithCustomToken(auth, token)
                 .then((userCredential) => {
                     context.commit('setUser', userCredential.user)
+                    context.dispatch('checkIfAdmin')
                 })
                 .catch((er) => {
                     alert(er.message)
@@ -127,7 +131,6 @@ const store = createStore({
                             context.commit('setAdmin', admin);
                             clearInterval(interval)
                         })
-                    return admin
                 }
             }, 1000)
         }

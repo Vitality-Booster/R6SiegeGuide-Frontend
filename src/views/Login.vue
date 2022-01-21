@@ -1,16 +1,13 @@
 <template>
-  <div v-if="isLoading" style="width: 100vw; height: 100vh" class="d-flex justify-content-center">
-    <looping-rhombuses-spinner class="align-self-center"
-                               :animation-duration="2500"
-                               :rhombus-size="15"
-                               :color="'#ff1d5e'"
-    />
-  </div>
-  <div v-else
+  <div>
+  <Spinner v-if="loadingComponents < 1" />
+  <div v-show="loadingComponents >= 1"
       :style="{backgroundColor: '#20123C', backgroundImage: 'url(' + loginBackgroundPic + ')',
        opacity: '100%', width: '100vw', height: '100vh', backgroundAttachment: 'fixed',
        backgroundPosition: 'center', objectPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
-    <div id="loginBackground" class="pt-5">
+    <div class="pt-5"
+         style="background-color: #4f450642; min-height: 100vh; min-width: 100vw;
+         background-position: center; background-repeat: no-repeat; background-size: cover;">
       <div class="pt-5">
         <h1 style="text-align: center; color: wheat;">Login</h1>
         <div class="pt-1 text-center" style="text-align: center; padding-top: 1%;">
@@ -42,6 +39,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -51,15 +49,15 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import {storage} from "../firebase/config";
 import {ref as storageRef, getDownloadURL} from "firebase/storage";
-import {LoopingRhombusesSpinner} from 'epic-spinners'
+import Spinner from "../components/Spinner";
 
 export default {
   name: 'Login',
   setup() {
     const store = useStore();
     const router = useRouter()
-    store.commit('setIsLoading', true);
-    const isLoading = computed(() => store.state.isLoading)
+    store.commit('resetLoadingComponents');
+    const loadingComponents = computed(() => store.state.loadingComponents)
 
     const email = ref('')
     const password = ref('')
@@ -78,11 +76,14 @@ export default {
             .catch(er => {
               alert(er.message)
             })
+        .finally(() => {
+          store.commit('addLoadingComponent', 1)
+        })
       }
       else {
         loginBackgroundPic.value = store.state.loginBackgroundPic
+        store.commit('addLoadingComponent', 1)
       }
-      store.commit('setIsLoading', false)
       console.log("The state was changed")
     }
 
@@ -100,11 +101,11 @@ export default {
     }
 
     loadEverything()
-    return {email, password, handleLogin, error, store, loginBackgroundPic, isLoading}
+    return {email, password, handleLogin, error, store, loginBackgroundPic, loadingComponents}
   },
   components: {
     LoginRegisterLinks,
-    LoopingRhombusesSpinner
+    Spinner
   },
   data () {
     return {
@@ -124,33 +125,5 @@ export default {
 </script>
 
 <style scoped>
-
-/*Background styles*/
-.Background {
-  background-position: center;
-  object-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#loginBackground {
-  background-color: #4f450642;
-  min-height: 100vh;
-  min-width: 100vw;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#logoBackground {
-  /*background-image: url("../assets/loginPicture.jpg");*/
-  min-height: 100vh;
-  min-width: 100vw;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/*End of background styles*/
 
 </style>
