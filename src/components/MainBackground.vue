@@ -33,9 +33,13 @@ export default {
           .catch(err => {
             alert(err.message)
           })
+      .finally(() => {
+        store.commit('addLoadingComponent', 1);
+      })
     }
     else {
       mainBackgroundPic.value = store.state.mainBackgroundPic
+      store.commit('addLoadingComponent', 1);
     }
 
 

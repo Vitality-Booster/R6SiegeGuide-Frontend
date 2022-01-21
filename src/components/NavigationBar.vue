@@ -64,9 +64,13 @@ export default {
           .catch(err => {
             alert(err.message)
           })
+      .finally(() => {
+        store.commit('addLoadingComponent', 1);
+      })
     }
     else {
       logoPic.value = store.state.logoPic
+      store.commit('addLoadingComponent', 1);
     }
 
 
