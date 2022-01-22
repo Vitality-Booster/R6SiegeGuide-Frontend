@@ -21,20 +21,20 @@
 
 <script>
 import MainBackground from "../components/MainBackground";
-// import axios from "axios";
+import axios from "axios";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import OperatorBox from "../components/OperatorBox";
-import {computed, ref} from "vue";
+import {computed} from "vue";
 
 export default {
   name: "Operators",
   components: {OperatorBox, MainBackground},
   setup() {
 
-    const operatorsNames = ref()
-    // const operatorsNames = axios.get(process.env.VUE_APP_BASE_URL + "operators/get-all-names")
-    // .then()
+    // const operatorsNames = ref()
+    const operatorsNames = axios.get(process.env.VUE_APP_BASE_URL + "operators/get-all-names")
+    .then()
 
     const router = useRouter();
     const store = useStore();
