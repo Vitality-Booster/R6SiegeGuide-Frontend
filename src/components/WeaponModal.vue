@@ -29,10 +29,9 @@
             </div>
             <div class="mb-3">
               <BFormGroup label="Picture">
-                <input class="form-control" type="file" id="weaponPic">
+                <input class="form-control" type="file" id="weaponPic" @change="previewPicture">
               </BFormGroup>
             </div>
-
           </form>
         </div>
         <div class="modal-footer d-flex justify-content-between">
@@ -51,8 +50,14 @@ export default {
   name: "WeaponModal",
   setup() {
     const weaponTypes = ref(['Primary', 'Secondary', 'Unique'])
+    const picture = ref()
 
-    return {weaponTypes}
+    const previewPicture = (event) => {
+      picture.value = event.target.file
+      console.log(event.target.file)
+      console.log(event.target.files)
+    }
+    return {weaponTypes, previewPicture}
   }
 }
 </script>

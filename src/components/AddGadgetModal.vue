@@ -27,7 +27,6 @@
                 <input class="form-control" type="file" id="weaponPic">
               </BFormGroup>
             </div>
-
           </form>
         </div>
         <div class="modal-footer d-flex justify-content-between">
