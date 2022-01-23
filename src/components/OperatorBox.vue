@@ -31,16 +31,6 @@ export default {
         .catch(err => {
           alert(err.message)
         })
-
-    // const operatorIconImage = storageRef(storage, 'operators/' + props.operatorName + '/' + 'icon.png')
-    // // This method gets the url of an image to which a reference "operatorPreviewImage" refers to
-    // getDownloadURL(operatorIconImage)
-    //     .then(res => {
-    //       document.getElementById('operatorIconImage').setAttribute('src', res)
-    //     })
-    //     .catch(err => {
-    //       alert(err.message)
-    //     })
     return {previewPic}
   }
 }
