@@ -3,10 +3,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from "../views/Login";
 import Operators from "../views/Operators";
-import Generator from "../views/Generator";
 import Maps from "../views/Maps";
 import SingleOperator from "../views/SingleOperator";
 import Register from "../views/Register";
+import Statistics from "../views/Statistics";
 
 // Vue.use(VueRouter)
 
@@ -38,8 +38,8 @@ const routes = [
   },
   {
       path: '/generator',
-      name: 'Generator',
-      component: Generator
+      name: 'Statistics',
+      component: Statistics
   },
   {
       path: '/maps',
