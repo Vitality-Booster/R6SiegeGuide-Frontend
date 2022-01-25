@@ -1,28 +1,25 @@
 <template>
   <BCard class="someWeirdClass text-center card-img-bottom p-0" :style="{backgroundImage: 'url(' + previewPic.valueOf() + ')'}">
-    <BCardBody id="operatorPreviewImage" class=""  :style="{height: '125px', width: '85px'}">
-<!--      <BCardImage id="operatorIconImage" :src="'url(' + iconPic.valueOf() + ')'" :style="{width: '30px', height: '30px'}"/>-->
-<!--      <b-card-image class="ms-1 position-absolute bottom-0" id="operatorIconImage" img-bottom="true"  :style="{width: '30px', height: '30px'}"></b-card-image>-->
+    <BCardBody id="mapPreviewImage" class=""  :style="{height: '150px', width: '200px'}">
     </BCardBody>
-    <BCardFooter class="p-0">{{operatorName.toUpperCase()}}</BCardFooter>
+    <BCardFooter class="p-0">{{mapName.toUpperCase()}}</BCardFooter>
   </BCard>
 </template>
 
 <script>
-import {ref as storageRef, getDownloadURL} from "firebase/storage";
-import {getStorage} from "firebase/storage";
+import {getDownloadURL, getStorage, ref as storageRef} from "firebase/storage";
 import {ref} from "vue";
 import {useStore} from "vuex";
 
 export default {
-  name: "OperatorBox",
+  name: "MapBox",
   props: [
-      'operatorName',
+    'mapName',
   ],
   setup(props) {
     const storage = getStorage()
     const previewPic = ref('')
-    const operatorPreviewImage = storageRef(storage, 'operators/' + props.operatorName + '/' + 'preview.png')
+    const operatorPreviewImage = storageRef(storage, 'maps/' + props.mapName + '.png')
     // This method gets the url of an image to which a reference "operatorPreviewImage" refers to
     getDownloadURL(operatorPreviewImage)
         .then(res => {
@@ -40,7 +37,7 @@ export default {
 </script>
 
 <style scoped>
-#operatorPreviewImage {
+#mapPreviewImage {
   background-position: center;
   object-position: center;
   background-repeat: no-repeat;
@@ -56,6 +53,5 @@ export default {
   background-size: cover;
   min-height: 100%;
   min-width: 100%;
-  background-color: aqua;
 }
 </style>

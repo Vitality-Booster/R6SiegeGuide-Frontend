@@ -9,7 +9,7 @@
           <router-link class="nav-link" to="/"><Link :link=home /></router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/generator"><Link :link="statistics"/></router-link>
+          <router-link class="nav-link" to="/statistics"><Link :link="statistics"/></router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/operators"><Link :link="operators"/></router-link>

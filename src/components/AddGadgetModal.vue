@@ -48,6 +48,9 @@ import axios from "axios";
 export default {
   name: "AddGadgetModal",
   components: {FilePreview},
+  props: [
+      'disable'
+  ],
   setup() {
     const gadgetTypes = ref(['Attacking', 'Defensive'])
     const picture = ref()

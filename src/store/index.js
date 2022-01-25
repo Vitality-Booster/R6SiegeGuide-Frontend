@@ -29,7 +29,7 @@ const store = createStore({
         queueStats: null,
         seasonalStats: null,
         playerStats: null,
-        profileStats: null
+        someNames: null
     },
     mutations: {
         setUser(state, payload) {
@@ -57,16 +57,27 @@ const store = createStore({
             state.loadingComponents = 0
         },
         setQueueStats(state, payload) {
-            state.queueStats = payload
+            // let i;
+            // for(i in payload){
+            //     if(payload.hasOwnProperty(i)){
+            //         state = payload[i]
+            //         console.log(payload[i]);
+            //     }
+            // }
+            state.queueStats = Object.values(payload)
         },
         setSeasonalStats(state, payload) {
             state.seasonalStats = payload
         },
         setPlayerStats(state, payload) {
-            state.playerStats = payload
-        },
-        setProfileStats(state, payload) {
-            state.profileStats = payload
+            // let i;
+            // for(i in payload){
+            //     if(payload[i]instanceof Object){
+            //         state = payload[i]
+            //         console.log(payload[i]);
+            //     }
+            // }
+            state.playerStats = Object.values(payload)
         },
     },
     actions: {

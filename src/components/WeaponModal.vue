@@ -11,7 +11,7 @@
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Name</label>
               <input type="text" class="form-control" id="exampleInputEmail1"
-                     aria-describedby="emailHelp" v-model="name" required>
+                     aria-describedby="emailHelp" v-model="name" required :disabled="disable">
             </div>
             <div class="mb-3">
               <BFormGroup label="Type" label-for="secWeapon2">
@@ -53,6 +53,9 @@ import {ref as storageRef, getStorage, uploadBytes} from "firebase/storage";
 export default {
   name: "WeaponModal",
   components: {FilePreview},
+  props: [
+      'disable'
+  ],
   setup() {
     const weaponTypes = ref(['Primary', 'Secondary', 'Unique'])
     const picture = ref()
@@ -64,7 +67,6 @@ export default {
 
     const setPicture = (file) => {
       picture.value = file
-      console.log(file)
     }
 
     const saveWeapon = async () => {
@@ -78,7 +80,6 @@ export default {
         const pictureRef = storageRef(storage, "/weapons/" + newName + ".png")
         uploadBytes(pictureRef, picture.value)
         .then(() => {
-          console.log("Uploaded a picture!")
         })
         .catch(err => {
           alert(err.message)
