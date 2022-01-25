@@ -25,7 +25,11 @@ const store = createStore({
         loginBackgroundPic: null,
         picturesWereLoaded: false,
         admin: null,
-        loadingComponents: 0
+        loadingComponents: 0,
+        queueStats: null,
+        seasonalStats: null,
+        playerStats: null,
+        someNames: null
     },
     mutations: {
         setUser(state, payload) {
@@ -51,7 +55,30 @@ const store = createStore({
         },
         resetLoadingComponents(state) {
             state.loadingComponents = 0
-        }
+        },
+        setQueueStats(state, payload) {
+            // let i;
+            // for(i in payload){
+            //     if(payload.hasOwnProperty(i)){
+            //         state = payload[i]
+            //         console.log(payload[i]);
+            //     }
+            // }
+            state.queueStats = Object.values(payload)
+        },
+        setSeasonalStats(state, payload) {
+            state.seasonalStats = payload
+        },
+        setPlayerStats(state, payload) {
+            // let i;
+            // for(i in payload){
+            //     if(payload[i]instanceof Object){
+            //         state = payload[i]
+            //         console.log(payload[i]);
+            //     }
+            // }
+            state.playerStats = Object.values(payload)
+        },
     },
     actions: {
         async register(context, {email, password, username, fullName}) {

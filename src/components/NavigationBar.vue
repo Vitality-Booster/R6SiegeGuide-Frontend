@@ -9,7 +9,7 @@
           <router-link class="nav-link" to="/"><Link :link=home /></router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/generator"><Link :link="generator"/></router-link>
+          <router-link class="nav-link" to="/statistics"><Link :link="statistics"/></router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/operators"><Link :link="operators"/></router-link>
@@ -45,7 +45,7 @@ export default {
   },
   setup() {
     const home = ref('Home');
-    const generator = ref('Generator');
+    const statistics = ref('Statistics');
     const operators = ref('Operators');
     const maps = ref('Maps');
     const logout = ref('Logout');
@@ -84,7 +84,7 @@ export default {
       }
     }
 
-    return { home, generator, operators, maps, logout, handleLogout, user, login, logoPic}
+    return { home, statistics, operators, maps, logout, handleLogout, user, login, logoPic}
   }
 }
 </script>

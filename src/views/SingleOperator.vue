@@ -1,138 +1,94 @@
 <template>
-  <MainBackground>
-    <WeaponModal />
-    <AddGadgetModal />
-    <BRow class="mt-3 mx-4 d-flex justify-content-between">
-      <BCol lg="6">
-        <BCard >
-          <label for="biographyTextarea">Biography</label>
-          <textarea class="form-control" id="biographyTextarea"></textarea>
-          <BCardText class="mt-2" size="lg">Place of Birth</BCardText>
-          <BFormGroup label="City" label-for="cityOfBirthInput">
-            <BFormInput type="text" id="cityOfBirthInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Country" label-for="countryOfBirthInput">
-            <BFormInput type="text" id="countryOfBirthInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Date of Birth" label-for="fateOfBirthInput">
-            <BFormInput type="date" id="dateOfBirthInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Select Primary Weapon 1" label-for="primWeapon1">
-            <BFormSelect id="primWeapon1" v-model="primaryWeapon1" :options="primaryWeapons"></BFormSelect>
-          </BFormGroup>
-          <BFormGroup label="Select Primary Weapon 2" label-for="primWeapon2">
-            <BFormSelect id="primWeapon2" :options="primaryWeapons"></BFormSelect>
-          </BFormGroup>
-          <BFormGroup label="Select Secondary Weapon 1" label-for="secWeapon1">
-            <BFormSelect id="secWeapon1" v-model="secondaryWeapon1" :options="primaryWeapons"></BFormSelect>
-          </BFormGroup>
-          <BFormGroup label="Select Primary Weapon 2" label-for="secWeapon2">
-            <BFormSelect id="secWeapon2" :options="primaryWeapons"></BFormSelect>
-          </BFormGroup>
-          <button type="button" v-show="primaryWeapon1 === 'New' || secondaryWeapon1 === 'New'"
-                  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#weaponModal">
-            Add new weapon
-          </button>
-          <BFormGroup label="Select Gadget 1">
-            <BFormSelect v-model="gadget1" :options="gadgets"></BFormSelect>
-          </BFormGroup>
-          <BFormGroup label="Select Gadget 2">
-            <BFormSelect :options="gadgets"></BFormSelect>
-          </BFormGroup>
-          <button type="button" v-show="gadget1 === 'New'"
-                  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gadgetModal">
-            Add new gadget
-          </button>
-        </BCard>
-      </BCol>
-      <BCol class="ms-3" lg="5">
-        <BCard >
-          <label for="operatorPicture">Operator photo</label>
-          <input class="form-control" type="file" id="operatorPicture">
-          <BFormGroup label="Name" label-for="nameInput">
-            <BFormInput type="text" id="nameInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Real Full Name" label-for="fullNameInput">
-            <BFormInput type="text" id="fullNameInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Special Unit" label-for="specialUnitInput">
-            <BFormInput type="text" id="specialUnitInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Unique Ability" label-for="uniqueAbilityInput">
-            <BFormInput type="text" id="uniqueAbilityInput">
-            </BFormInput>
-          </BFormGroup>
-          <BFormGroup label="Side" label-for="sideSelectInput">
-            <BFormSelect id="sideSelectInput" :options="sides"></BFormSelect>
-          </BFormGroup>
-          <BFormGroup>
-            <BFormRating variant="info" class="mb-2"></BFormRating>
-          </BFormGroup>
-          <label class="">Select operator's health</label>
-          <BFormCheckboxGroup>
-            <BFormCheckbox size="sm">100 HP</BFormCheckbox>
-            <BFormCheckbox>110 HP</BFormCheckbox>
-            <BFormCheckbox size="lg">120 HP</BFormCheckbox>
-          </BFormCheckboxGroup>
-          <label class="">Select operator's speed</label>
-          <BFormCheckboxGroup class="">
-            <BFormCheckbox size="sm">Slow</BFormCheckbox>
-            <BFormCheckbox>Average</BFormCheckbox>
-            <BFormCheckbox size="lg">Fast</BFormCheckbox>
-          </BFormCheckboxGroup>
-          <label class="">Select operator's difficulty</label>
-          <BFormCheckboxGroup>
-            <BFormCheckbox size="sm">Easy</BFormCheckbox>
-            <BFormCheckbox>Average</BFormCheckbox>
-            <BFormCheckbox size="lg">Difficult</BFormCheckbox>
-          </BFormCheckboxGroup>
-        </BCard>
-
-          <div class="mt-4 d-flex justify-content-end">
-          <button type="button" class="btn btn-danger btn-lg mr-5">Cancel</button>
-          <button type="button" class="btn btn-primary btn-lg">Save</button>
-          </div>
-      </BCol>
-    </BRow>
-  </MainBackground>
+  <div>
+    <Spinner v-if="loadingComponents < 9" />
+    <MainBackground v-show="loadingComponents >= 9">
+      <div class="m-4">
+        <BRow class="pb-5">
+          <BCol class="text-center" lg="4">
+            <div>
+              <BImg :src="opPicture" alt="<<operator preview>>" />
+            </div>
+            <h1 class="mt-2" style="color: white">{{operator.name}}</h1>
+            <h5 class="mt-2" style="color: white">{{operator.specialUnit}}</h5>
+            <h3 class="mt-2" style="color: white">{{operator.side}}</h3>
+          </BCol>
+          <BCol lg="4">
+            <BFormGroup style="color: white" label="Biography">
+              <h4 style="color: white">{{operator.biography}}</h4>
+            </BFormGroup>
+            <h4 class="mt-3" style="color: white">Real Name: {{operator.realFullName}}</h4>
+            <h4 class="mt-3" style="color: white">Place of Birth: {{operator.cityOfBirth}}, {{operator.countryOfBirth}}</h4>
+            <h4 class="mt-3" style="color: white">Date of Birth: {{operator.dateOfBirth.substr(0, 10)}}</h4>
+            <h4 class="mt-3" style="color: white">Unique ability: {{operator.uniqueAbility}}</h4>
+            <h4 class="mt-3" style="color: white">Health: {{healthArray[operator.healthPoints - 1]}}</h4>
+            <h4 class="mt-3" style="color: white">Speed: {{speedArray[operator.speedPoints - 1]}}</h4>
+            <h4 class="mt-3" style="color: white">Difficulty: {{diffArray[operator.difficultyPoints - 1]}}</h4>
+          </BCol>
+          <BCol lg="4" v-if="loadingComponents >= 3">
+            <h2 style="color: white">Loadout</h2>
+            <ViewWeapon :weapon="operator.primaryWeapon1" />
+            <ViewWeapon :weapon="operator.primaryWeapon2" />
+            <ViewWeapon :weapon="operator.secondaryWeapon1" />
+            <ViewWeapon :weapon="operator.secondaryWeapon2" />
+            <ViewGadget :gadget="operator.gadget1" />
+            <ViewGadget class="mt-2" :gadget="operator.gadget2" />
+          </BCol>
+        </BRow>
+      </div>
+    </MainBackground>
+  </div>
 </template>
 
 <script>
+import {useRouter} from "vue-router";
+import {useStore} from "vuex";
+import {computed, ref} from "vue";
+import Spinner from "../components/Spinner";
 import MainBackground from "../components/MainBackground";
 import axios from "axios";
-import {useRouter} from "vue-router";
-import { ref} from "vue";
-import WeaponModal from "../components/WeaponModal";
-import AddGadgetModal from "../components/AddGadgetModal";
+import {ref as storageRef,getDownloadURL, getStorage} from "firebase/storage";
+import ViewWeapon from "../components/ViewWeapon";
+import ViewGadget from "../components/ViewGadget";
+
 export default {
   name: "SingleOperator",
-  components: {AddGadgetModal, WeaponModal, MainBackground},
+  components: {ViewGadget, ViewWeapon, MainBackground, Spinner},
   setup() {
     const router = useRouter()
-    const file2 = null
-    const route = router.currentRoute.value.fullPath
-    const name = route.substr(route.lastIndexOf("/") + 1, route.length)
-    const operatorPic = ref(null)
-    const sides = ref(["Attacker", "Defender"])
-    const health = ref([1, 2, 3])
-    const value = ref()
-    const primaryWeapons = ref(['Some weapon', 'New'])
-    const primaryWeapon1 = ref()
-    const secondaryWeapon1 = ref()
-    const gadgets = ref(['Some Gadget', 'New'])
-    const gadget1 = ref()
+    const healthArray = ['100 HP', '110 HP', '120 HP']
+    const speedArray = ['Slow', 'Average', 'Fast']
+    const diffArray = ['Easy', 'Average', 'Hard']
+    const operatorPath = router.currentRoute.value.path
+    const operatorName = operatorPath.substr(operatorPath.lastIndexOf("/") + 1)
+    const store = useStore()
+    const operator = ref()
+    const opPicture = ref('value')
+    store.commit('resetLoadingComponents')
+    const loadingComponents = computed(() => store.state.loadingComponents)
 
-    const operator = axios.get(process.env.VUE_APP_BASE_URL + "/operators/" + name)
+    const loadOperator = async () => {
+      await axios.get(process.env.VUE_APP_BASE_URL + "/operators/" + operatorName)
+      .then(res => {
+        operator.value = res.data
+        store.state.someNames = res.data
+      })
+          .then(async () => {
+            const storage = getStorage()
+            const operRef = storageRef(storage, "/operators/" + operatorName + "/preview.png")
+            getDownloadURL(operRef)
+            .then(async res => {
+              opPicture.value = res
+            })
+            store.commit('addLoadingComponent', 1)
+          })
+      .catch(er => {
+        alert(er.message)
+      })
+    }
 
-    return {operator, operatorPic, file2, sides, value,
-      health, primaryWeapons, primaryWeapon1, secondaryWeapon1,
-    gadgets, gadget1}
+    loadOperator()
+
+    return {loadingComponents, opPicture, operator, speedArray, healthArray, diffArray}
   }
 }
 </script>
